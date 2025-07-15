@@ -23,6 +23,11 @@ var flipped = false
 var grade_color = Color.WHITE
 var toDestroy := true
 
+#InspectVars
+var inspected = false
+var inspect_pos = null
+var eyeing = false
+
 var Name_Chance = [
 	50,                     #0 : 500
 	40,                   	#1 : 900
@@ -152,11 +157,9 @@ func _ready() :
 	card_shine_anim = card_shine.get_child(1)
 
 func flip_card():
-	if flipped:
-		anim_player.play_backwards("Card_flip")
-	else:
+	if !flipped:
 		anim_player.play("Card_Flip")
-	flipped = !flipped
+		flipped = true
 
 func _on_button_button_down():
 	flip_card()
@@ -168,3 +171,42 @@ func _on_button_mouse_entered() -> void:
 func _on_button_mouse_exited() -> void:
 	if !flipped :
 		card_shine_anim.play_backwards("Shine_Appear")
+
+func _on_inspect_button_down() -> void:
+	if !inspected :
+		inspect_pos = global_position
+		scale += Vector2(1.65, 1.65)
+		global_position = Vector2(0.0, 0.0)
+		z_index = 1
+		inspected = true
+	else :
+		global_position = inspect_pos
+		z_index = 0
+		card_frame.visible = true
+		card_name.visible = true
+		card_grade.visible = true
+		card_edition.visible = true
+		card_desc.visible = true
+		$Eye.modulate.a = 1
+		scale -= Vector2(1.65, 1.65)
+		inspected = false
+	
+
+
+func _on_eye_button_down() -> void:
+	if inspected and !eyeing:
+		card_frame.visible = false
+		card_name.visible = false
+		card_grade.visible = false
+		card_edition.visible = false
+		card_desc.visible = false
+		$Eye.modulate.a = 0.2
+		eyeing = true
+	else :
+		card_frame.visible = true
+		card_name.visible = true
+		card_grade.visible = true
+		card_edition.visible = true
+		card_desc.visible = true
+		$Eye.modulate.a = 1
+		eyeing = false
