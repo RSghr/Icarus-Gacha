@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://btgr8jy6q7hgd"]
+
+[node name="Card_Category" type="Node2D"]
+
+[node name="Pyro" type="Marker2D" parent="."]
+position = Vector2(-2009, 2)
+
+[node name="Magpie" type="Marker2D" parent="."]
+position = Vector2(-1509, 2)
+
+[node name="RippinKittin" type="Marker2D" parent="."]
+position = Vector2(-1009, 2)
+
+[node name="Boss" type="Marker2D" parent="."]
+position = Vector2(-509, 2)
+
+[node name="Frivelk" type="Marker2D" parent="."]
+position = Vector2(-9, 2)
+
+[node name="Shakary" type="Marker2D" parent="."]
+position = Vector2(491, 2)
+
+[node name="Warspite" type="Marker2D" parent="."]
+position = Vector2(991, 2)
+
+[node name="Roach" type="Marker2D" parent="."]
+position = Vector2(1491, 2)
+
+[node name="Panini" type="Marker2D" parent="."]
+position = Vector2(1991, 2)
+
+[node name="Pengus" type="Marker2D" parent="."]
+position = Vector2(2490, 0)
+
+[node name="Roach Summer Edition" type="Marker2D" parent="."]
+position = Vector2(-2490, 0)
+
+[node name="GLITCHED" type="Marker2D" parent="."]
+position = Vector2(-9, 1079)

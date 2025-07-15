@@ -1,0 +1,185 @@
+[gd_scene load_steps=19 format=3 uid="uid://bkquelsp04hw8"]
+
+[ext_resource type="Texture2D" uid="uid://by7ly1vtsi8dc" path="res://Characters/Boss.png" id="1_43xav"]
+[ext_resource type="Script" uid="uid://cy1aui7nyuobi" path="res://card.gd" id="1_qn8yl"]
+[ext_resource type="Texture2D" uid="uid://cn06k6d0dgn7v" path="res://Characters/Frivelk.png" id="2_otofn"]
+[ext_resource type="Texture2D" uid="uid://nhlvl25x6bsd" path="res://Characters/Magpie.png" id="3_qn8yl"]
+[ext_resource type="Texture2D" uid="uid://dc1wwt0ohpr52" path="res://Characters/Panini.png" id="4_vfnyv"]
+[ext_resource type="Texture2D" uid="uid://ki4ii2edgtrm" path="res://Characters/Pengus.png" id="5_24g1d"]
+[ext_resource type="Texture2D" uid="uid://c1ki8nhi3d0w8" path="res://Characters/RippinKittin.png" id="6_3qnxv"]
+[ext_resource type="Texture2D" uid="uid://dsv67gpu0n1su" path="res://Characters/Roach.png" id="7_ku05v"]
+[ext_resource type="Texture2D" uid="uid://6f7wb7d52pox" path="res://Characters/Roach_Cleavage.png" id="8_udsyw"]
+[ext_resource type="Texture2D" uid="uid://cp5i4tu0bv27h" path="res://Characters/Shakary.png" id="9_1j557"]
+[ext_resource type="Texture2D" uid="uid://b7gtb8v0smtjo" path="res://Characters/Warspite.png" id="10_s2k0k"]
+[ext_resource type="Texture2D" uid="uid://wmagx6k04lq0" path="res://Characters/Pyro.png" id="11_k5rk8"]
+[ext_resource type="Texture2D" uid="uid://cjtfx6xioba44" path="res://Frame.png" id="12_otofn"]
+[ext_resource type="Texture2D" uid="uid://dssxo2b78at87" path="res://Icarus_Back.png" id="14_vfnyv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gr8ir"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_k5rk8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_qn8yl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_3qnxv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_43xav")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_otofn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_1j557")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_s2k0k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ku05v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_vfnyv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_24g1d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_udsyw")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_24g1d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Back:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3qnxv"]
+resource_name = "Card_Flip"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.4, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Back:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.36667, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ku05v"]
+_data = {
+&"Card_Flip": SubResource("Animation_3qnxv"),
+&"RESET": SubResource("Animation_24g1d")
+}
+
+[node name="Card" type="Node2D"]
+script = ExtResource("1_qn8yl")
+
+[node name="Character_Frame" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gr8ir")
+
+[node name="Frame" type="Sprite2D" parent="."]
+modulate = Color(0.62, 0.62, 0.62, 1)
+texture = ExtResource("12_otofn")
+
+[node name="Name" type="RichTextLabel" parent="."]
+modulate = Color(1, 0.02, 0.02, 1)
+offset_left = -175.0
+offset_top = -446.0
+offset_right = 267.0
+offset_bottom = -389.0
+theme_override_font_sizes/normal_font_size = 36
+text = "Roach Summer Edition"
+vertical_alignment = 1
+
+[node name="Grade" type="RichTextLabel" parent="."]
+modulate = Color(1, 0.02, 0.02, 1)
+offset_left = -314.0
+offset_top = -446.0
+offset_right = -242.0
+offset_bottom = -362.0
+theme_override_font_sizes/normal_font_size = 60
+text = "S"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="."]
+modulate = Color(1, 0.02, 0.02, 1)
+offset_left = -308.0
+offset_top = 194.0
+offset_right = 307.0
+offset_bottom = 441.0
+theme_override_font_sizes/normal_font_size = 30
+text = "Placeholder"
+
+[node name="Edition" type="RichTextLabel" parent="."]
+offset_left = 238.0
+offset_top = 407.0
+offset_right = 333.0
+offset_bottom = 463.0
+theme_override_font_sizes/normal_font_size = 30
+text = "0000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ku05v")
+}
+
+[node name="Back" type="Sprite2D" parent="."]
+texture = ExtResource("14_vfnyv")
+
+[node name="Button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = -368.0
+offset_top = -500.0
+offset_right = 382.0
+offset_bottom = 500.0
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
