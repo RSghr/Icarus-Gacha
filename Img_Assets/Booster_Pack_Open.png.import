@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkj6hn5rj18jx"
-path="res://.godot/imported/Eye.png-97c02363eb8ba3529441955289b7a438.ctex"
+uid="uid://b85cv3b4mordi"
+path="res://.godot/imported/Booster_Pack_Open.png-42afd61ebb9713eb412cec9316aa73e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Eye.png"
-dest_files=["res://.godot/imported/Eye.png-97c02363eb8ba3529441955289b7a438.ctex"]
+source_file="res://Img_Assets/Booster_Pack_Open.png"
+dest_files=["res://.godot/imported/Booster_Pack_Open.png-42afd61ebb9713eb412cec9316aa73e7.ctex"]
 
 [params]
 

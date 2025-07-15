@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://p3ddn3cvbqky"]
 
-[ext_resource type="Script" uid="uid://bqpwdij22amcr" path="res://main.gd" id="1_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://o1am6pwlvb" path="res://collection.tscn" id="2_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://7imb5eg5an35" path="res://daily.tscn" id="3_h2yge"]
-[ext_resource type="Texture2D" uid="uid://q5ui0612lhb2" path="res://Chevron.png" id="4_1bvp3"]
-[ext_resource type="PackedScene" uid="uid://bcrh73ga5alpv" path="res://code.tscn" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://bqpwdij22amcr" path="res://Scripts/main.gd" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://o1am6pwlvb" path="res://Scenes/collection.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://7imb5eg5an35" path="res://Scenes/daily.tscn" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://q5ui0612lhb2" path="res://Img_Assets/Chevron.png" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://bcrh73ga5alpv" path="res://Scenes/code.tscn" id="5_lquwl"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_0xm2m")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bj8max1en3ojf"]
 
-[ext_resource type="Texture2D" uid="uid://0i4x2g2bvj8y" path="res://Shine.png" id="1_c3vn1"]
+[ext_resource type="Texture2D" uid="uid://0i4x2g2bvj8y" path="res://Img_Assets/Shine.png" id="1_c3vn1"]
 
 [sub_resource type="Animation" id="Animation_myi6d"]
 length = 0.001

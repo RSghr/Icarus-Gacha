@@ -4,7 +4,7 @@ const SAVE_PATH = "user://Icarus_Gacha/daily_button.cfg"
 @onready var dailyButton = $Get_Daily
 @onready var pulls = 3
 
-var boosterScene = load("res://booster.tscn")
+var boosterScene = load("res://Scenes/booster.tscn")
 var mainScene
 var coded = false
 

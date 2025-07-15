@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dssxo2b78at87"
-path="res://.godot/imported/Icarus_Back.png-6abb6c92738cedabe82c8c437740b05d.ctex"
+path="res://.godot/imported/Icarus_Back.png-606c9aedb21d91f124d8753722135107.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Icarus_Back.png"
-dest_files=["res://.godot/imported/Icarus_Back.png-6abb6c92738cedabe82c8c437740b05d.ctex"]
+source_file="res://Img_Assets/Icarus_Back.png"
+dest_files=["res://.godot/imported/Icarus_Back.png-606c9aedb21d91f124d8753722135107.ctex"]
 
 [params]
 
