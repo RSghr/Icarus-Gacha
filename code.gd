@@ -8,7 +8,7 @@ var mainScene
 func _ready():
 	mainScene = get_tree().root.get_child(0)
 	print("Today's code is: ", generate_daily_code())
-	#_CODE_REDEEM() #Keep commented prints the code to redeem. for Admin only
+	_CODE_REDEEM() #Keep commented prints the code to redeem. for Admin only
 	
 func generate_daily_code() -> String:
 	var date_str = get_today_string()
