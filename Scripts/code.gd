@@ -2,7 +2,7 @@ extends Node2D
 
 @export var SECRET_KEY = "ICARE_SUPER_SECRET_CODE"
 
-var dailyScene = load("res://daily.tscn")
+var dailyScene = load("res://Scenes/daily.tscn")
 var mainScene
 
 func _ready():
@@ -13,18 +13,18 @@ func _ready():
 func generate_daily_code() -> String:
 	var date_str = get_today_string()
 	var base = date_str + SECRET_KEY
-	var hash = str(hash_string(base))
-	return hash.substr(0, 6).to_upper()
+	var hashed = str(hash_string(base))
+	return hashed.substr(0, 6).to_upper()
 
 func get_today_string() -> String:
 	var now = Time.get_datetime_dict_from_system()
 	return "%04d-%02d-%02d" % [now.year, now.month, now.day]
 
 func hash_string(input: String) -> int:
-	var hash = 0
+	var hashed = 0
 	for c in input:
-		hash = int(c.unicode_at(0)) + ((hash << 5) - hash)
-	return abs(hash)
+		hashed = int(c.unicode_at(0)) + ((hashed << 5) - hashed)
+	return abs(hashed)
 	
 func redeem_code(user_input: String) -> bool:
 	var correct_code = generate_daily_code()

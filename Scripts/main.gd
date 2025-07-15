@@ -1,7 +1,7 @@
 extends Node2D
 
-var cardScene = load("res://Card.tscn")
-var boosterScene = load("res://booster.tscn")
+var cardScene = load("res://Scenes/Card.tscn")
+var boosterScene = load("res://Scenes/booster.tscn")
 @onready var marker_nodes = [
 	$Marker2D1,
 	$Marker2D2,

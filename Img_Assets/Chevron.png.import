@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsfmm7fr1yr1g"
-path="res://.godot/imported/Icarus_Icon_V2.png-afdbd261a288ee11ec07b7f0f36f41d0.ctex"
+uid="uid://q5ui0612lhb2"
+path="res://.godot/imported/Chevron.png-3a6d5d8c474e53f1cd01ff54d6893c5f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Icarus_Icon_V2.png"
-dest_files=["res://.godot/imported/Icarus_Icon_V2.png-afdbd261a288ee11ec07b7f0f36f41d0.ctex"]
+source_file="res://Img_Assets/Chevron.png"
+dest_files=["res://.godot/imported/Chevron.png-3a6d5d8c474e53f1cd01ff54d6893c5f.ctex"]
 
 [params]
 

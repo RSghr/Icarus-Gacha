@@ -1,8 +1,8 @@
 [gd_scene load_steps=23 format=3 uid="uid://bkquelsp04hw8"]
 
 [ext_resource type="Texture2D" uid="uid://by7ly1vtsi8dc" path="res://Characters/Boss.png" id="1_43xav"]
-[ext_resource type="Script" uid="uid://cy1aui7nyuobi" path="res://card.gd" id="1_qn8yl"]
-[ext_resource type="PackedScene" uid="uid://bj8max1en3ojf" path="res://shine.tscn" id="2_24g1d"]
+[ext_resource type="Script" uid="uid://cy1aui7nyuobi" path="res://Scripts/card.gd" id="1_qn8yl"]
+[ext_resource type="PackedScene" uid="uid://bj8max1en3ojf" path="res://Scenes/shine.tscn" id="2_24g1d"]
 [ext_resource type="Texture2D" uid="uid://cn06k6d0dgn7v" path="res://Characters/Frivelk.png" id="2_otofn"]
 [ext_resource type="Texture2D" uid="uid://nhlvl25x6bsd" path="res://Characters/Magpie.png" id="3_qn8yl"]
 [ext_resource type="Texture2D" uid="uid://dc1wwt0ohpr52" path="res://Characters/Panini.png" id="4_vfnyv"]
@@ -13,10 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://cp5i4tu0bv27h" path="res://Characters/Shakary.png" id="9_1j557"]
 [ext_resource type="Texture2D" uid="uid://b7gtb8v0smtjo" path="res://Characters/Warspite.png" id="10_s2k0k"]
 [ext_resource type="Texture2D" uid="uid://wmagx6k04lq0" path="res://Characters/Pyro.png" id="11_k5rk8"]
-[ext_resource type="Texture2D" uid="uid://cjtfx6xioba44" path="res://Frame.png" id="12_otofn"]
-[ext_resource type="Texture2D" uid="uid://dssxo2b78at87" path="res://Icarus_Back.png" id="14_vfnyv"]
-[ext_resource type="Texture2D" uid="uid://cwt5yney8tngv" path="res://Loupe.png" id="16_3qnxv"]
-[ext_resource type="Texture2D" uid="uid://dkj6hn5rj18jx" path="res://Eye.png" id="17_ku05v"]
+[ext_resource type="Texture2D" uid="uid://cjtfx6xioba44" path="res://Img_Assets/Frame.png" id="12_otofn"]
+[ext_resource type="Texture2D" uid="uid://dssxo2b78at87" path="res://Img_Assets/Icarus_Back.png" id="14_vfnyv"]
+[ext_resource type="Texture2D" uid="uid://cwt5yney8tngv" path="res://Img_Assets/Loupe.png" id="16_3qnxv"]
+[ext_resource type="Texture2D" uid="uid://dkj6hn5rj18jx" path="res://Img_Assets/Eye.png" id="17_ku05v"]
 
 [sub_resource type="Animation" id="Animation_3qnxv"]
 resource_name = "Card_Flip"
@@ -222,17 +222,6 @@ text = "0000"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Back" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("14_vfnyv")
-
-[node name="Button" type="Button" parent="."]
-self_modulate = Color(1, 1, 1, 0)
-offset_left = -368.0
-offset_top = -500.0
-offset_right = 382.0
-offset_bottom = 500.0
-
 [node name="Inspect" type="Node2D" parent="."]
 position = Vector2(323, -449)
 
@@ -242,6 +231,7 @@ offset_left = -51.0
 offset_top = -50.0
 offset_right = 52.0
 offset_bottom = 81.0
+metadata/_edit_use_anchors_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Inspect"]
 position = Vector2(-6.99999, 28)
@@ -262,9 +252,19 @@ offset_bottom = 30.0
 scale = Vector2(0.324219, 0.324219)
 texture = ExtResource("17_ku05v")
 
+[node name="Back" type="Sprite2D" parent="."]
+texture = ExtResource("14_vfnyv")
+
+[node name="Button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = -368.0
+offset_top = -500.0
+offset_right = 382.0
+offset_bottom = 500.0
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="button_down" from="Inspect/Inspect" to="." method="_on_inspect_button_down"]
+[connection signal="button_down" from="Eye/Eye2" to="." method="_on_eye_button_down"]
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
-[connection signal="button_down" from="Inspect/Inspect" to="." method="_on_inspect_button_down"]
-[connection signal="button_down" from="Eye/Eye2" to="." method="_on_eye_button_down"]
