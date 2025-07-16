@@ -222,6 +222,13 @@ text = "0000"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = -368.0
+offset_top = -500.0
+offset_right = 382.0
+offset_bottom = 500.0
+
 [node name="Inspect" type="Node2D" parent="."]
 position = Vector2(323, -449)
 
@@ -255,16 +262,9 @@ texture = ExtResource("17_ku05v")
 [node name="Back" type="Sprite2D" parent="."]
 texture = ExtResource("14_vfnyv")
 
-[node name="Button" type="Button" parent="."]
-self_modulate = Color(1, 1, 1, 0)
-offset_left = -368.0
-offset_top = -500.0
-offset_right = 382.0
-offset_bottom = 500.0
-
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="button_down" from="Inspect/Inspect" to="." method="_on_inspect_button_down"]
-[connection signal="button_down" from="Eye/Eye2" to="." method="_on_eye_button_down"]
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
+[connection signal="button_down" from="Inspect/Inspect" to="." method="_on_inspect_button_down"]
+[connection signal="button_down" from="Eye/Eye2" to="." method="_on_eye_button_down"]
