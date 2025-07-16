@@ -58,5 +58,6 @@ func _on_button_button_down() -> void:
 		instance.coded = true
 		mainScene.add_child(instance)
 		instance.position = Vector2(-250.0, 1000.0)
+		$TextEdit.text = "Code redeemed!"
 	else:
 		$TextEdit.text = "Invalid or already used\n code."
