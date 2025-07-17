@@ -16,11 +16,12 @@ func _ready():
 	var last_press_date = ""
 	if err == OK:
 		last_press_date = config.get_value("daily", "last_pressed", "")
+		pulls = config.get_value("packs", "unopened", pulls)
 	
 	var today = get_today_string()
-
-	if last_press_date == today and !coded:
-		queue_free()
+	label_update()
+	if last_press_date == today and !coded and pulls == 0:
+		button_update(0.0, false)
 
 func get_today_string() -> String:
 	var now = Time.get_datetime_dict_from_system()
@@ -28,11 +29,29 @@ func get_today_string() -> String:
 
 func _on_get_daily_button_down() -> void:
 	# Save today's date to file
-	var config = ConfigFile.new()
-	config.set_value("daily", "last_pressed", get_today_string())
-	config.save(SAVE_PATH)
+	update_daily_save()
 	
 	var instance = boosterScene.instantiate()
 	instance.availability = pulls
-	mainScene.add_child(instance)	
-	queue_free()
+	mainScene.add_child(instance)
+	button_update(0.0, false)
+
+func update_daily_save():
+	var config = ConfigFile.new()
+	config.set_value("daily", "last_pressed", get_today_string())
+	config.set_value("packs", "unopened", pulls)
+	config.save(SAVE_PATH)
+
+func button_update(a, disable):
+	modulate.a = a
+	$Get_Daily.disabled = disable
+	label_update()
+	
+func label_update():
+	$RichTextLabel.text = "Get your "
+	if pulls == 1:
+		$RichTextLabel.text += "pack"
+	else :
+		$RichTextLabel.text += str(pulls)
+		$RichTextLabel.text += " packs"
+	

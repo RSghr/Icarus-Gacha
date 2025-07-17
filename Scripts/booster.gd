@@ -1,15 +1,16 @@
 extends Node2D
 
 var availability = 3
+var mainScene
 
 func _ready():
+	mainScene = get_tree().root.get_child(0)
 	get_tree().root.get_child(0).link_anim($AnimationPlayer)
 
 func _unhandled_input(event):
 	if event.is_action_pressed("Open"):
 		if availability > 0:
 			$AnimationPlayer.play("Booster_Open")
-
 
 func _on_booster_button_down():
 	if availability > 0:
@@ -26,3 +27,4 @@ func _on_next_pack_button_down() -> void:
 		$Booster_Top.modulate.a = 1.0
 		$Booster_Sprite.modulate.a = 1.0
 		$AnimationPlayer.play("Booster_Appear")
+		mainScene._on_collect_button_down()

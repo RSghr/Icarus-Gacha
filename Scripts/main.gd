@@ -11,6 +11,7 @@ var boosterScene = load("res://Scenes/booster.tscn")
 ]
 
 @onready var collection = $Collection
+@onready var daily = $Daily
 
 #func _unhandled_input(event):
 	#if event.is_action_pressed("Generate"): 
@@ -36,7 +37,6 @@ var boosterScene = load("res://Scenes/booster.tscn")
 		#collection.save_cards_list()
 
 @export var scroll_speed: float = 0.7
-
 var mouse_edge = 3000.0
 var mouse_edge_positive = mouse_edge
 var mouse_edge_negative = mouse_edge * -1
@@ -59,13 +59,15 @@ func _ready():
 func link_anim(anim):
 	anim.animation_finished.connect(_on_booster_animation_finished)
 
-func _process(delta):
+func _process(_delta):
 	if collection.shown :
+		var viewportX_limit = get_viewport_rect().end.x / 5
+		var viewportY_limit = get_viewport_rect().end.y / 10
 		if $Camera2D.position.x < mouse_edge_positive:
-			if get_viewport().get_mouse_position().x > 1500 :
+			if get_viewport().get_mouse_position().x > (get_viewport_rect().end.x - viewportX_limit) and  get_viewport().get_mouse_position().y > viewportY_limit:
 				$Camera2D.position.x += scroll_speed * 50
 		if $Camera2D.position.x > mouse_edge_negative:
-			if get_viewport().get_mouse_position().x < 200 :
+			if get_viewport().get_mouse_position().x < viewportX_limit and  get_viewport().get_mouse_position().y > viewportY_limit:
 				$Camera2D.position.x -= scroll_speed * 50
 	else :
 		$Camera2D.position.x =  0
@@ -83,6 +85,8 @@ func spawn_cards_to_markers():
 		var tween = create_tween()
 		tween.tween_property(instance, "position", marker.global_position, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	$Booster.availability -= 1
+	$Daily.pulls = $Booster.availability
+	$Daily.update_daily_save()
 	if $Booster.availability == 0:
 		$Booster.queue_free()
 
