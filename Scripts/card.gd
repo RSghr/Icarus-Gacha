@@ -56,6 +56,20 @@ var Name_list = {
 	"Roach Summer Edition" : 10      #10
 }
 
+var desc_list = {
+	"Masterful baker when not on missions, he brings bread instead of extra magazines. He knows where the hellbomb is." : 0,																						#0
+	"Her messed up sleep schedule allows her to deploy at times when the enemy expects the least it.\nShe packs an extra hellbomb but she never let anyone know where it is hidden." : 1,							#1
+	"He is a methodical killer, expert in laser weaponry, and he loves to spend his 2.4 seconds of free time with his pet Jowie.\nJowie is a good corgi." : 2,														#2
+	"No matter who she's facing, with the giant Greatsword in her hand, she will scream \"woMEN GO IN!!\" and charge straight into battle." : 3,																	#5
+	"SEAF usually chant a traditionnal chime when they get a glance of her, it goes like : \"Tu Tu Tu TURU MAX VERSTAPPEN!\" " : 4,																					#9
+	"First human hybrid, she spends FTL travel time making a new armor that fits her tail." : 5,																													#3
+	"She is playful and sassy, she loves to bully SEAF soldiers on her free time.\nShe is the top member of the piss laser Department." : 6,																		#6
+	"She is quite reserved but cares deeply about her comrades, she can go above and beyond for them.\nHer only flaw, is that she doesn't know how to respond to compliments without fleeing the scene." : 7,		#7
+	"Helps out in the bakery, she is known as the \"MASTER BAKER\", but also as the leader of Icarus squad. She's ready to carry the burden of her allies anytime." : 8,											#8
+	"Sometimes you can hear her evil laugh down the hallways of the destroyer...\nNever trust her when she says \"I have a plan, hear me out\"." : 9,                    											#4
+	"Holy shit her boobs are huge!" : 10      																																										#10
+}
+
 var Grade_Chance = [
 	100,          # F : 1000
 	150,          # E : 2500
@@ -95,6 +109,7 @@ func name_random():
 	for i in range(0, Name_Chance.size()):
 		cumulative += Name_Chance[i] * 10
 		if r < cumulative:
+			card_desc.text = desc_list.find_key(i)
 			return Name_list.find_key(i)
 	return "GLITCHED"
 
@@ -118,6 +133,8 @@ func Color_Applier():
 	card_frame.modulate = grade_color
 	card_name.modulate = grade_color
 	card_desc.modulate = grade_color
+	if card_params["grade"] == "Z":
+		card_desc.modulate = Color.GRAY
 	card_grade.modulate = grade_color
 	card_shine.modulate = grade_color
 	card_shine.get_child(0).modulate.a = 0
@@ -125,6 +142,7 @@ func Color_Applier():
 func Frame_Applier():
 	if card_name.text in Name_list:
 		character.frame = Name_list[card_name.text]
+		card_desc.text = desc_list.find_key(Name_list[card_name.text])
 	else:
 		var r = randi_range(0, 11)
 		character.frame = r
@@ -142,11 +160,13 @@ func export_vars():
 	card_params["name"] = card_name.text
 	card_params["grade"] = card_grade.text
 	card_params["edition"] = card_edition.text
+	card_params["description"] = card_desc.text
 
 func import_vars():
 	card_edition.text = card_params["edition"]
 	card_name.text = card_params["name"]
 	card_grade.text = card_params["grade"]
+	card_desc.text = card_params["description"]
 	grade_color_picker()
 	Color_Applier()
 	Frame_Applier()

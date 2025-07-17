@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://p3ddn3cvbqky"]
+[gd_scene load_steps=7 format=3 uid="uid://p3ddn3cvbqky"]
 
 [ext_resource type="Script" uid="uid://bqpwdij22amcr" path="res://Scripts/main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://o1am6pwlvb" path="res://Scenes/collection.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://dcefxn5gaiji6" path="res://Scenes/background.tscn" id="2_21xkr"]
 [ext_resource type="PackedScene" uid="uid://7imb5eg5an35" path="res://Scenes/daily.tscn" id="3_h2yge"]
 [ext_resource type="Texture2D" uid="uid://q5ui0612lhb2" path="res://Img_Assets/Chevron.png" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://bcrh73ga5alpv" path="res://Scenes/code.tscn" id="5_lquwl"]
@@ -9,14 +10,10 @@
 [node name="Main" type="Node2D"]
 script = ExtResource("1_0xm2m")
 
-[node name="Collection" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(0, 2000)
-
-[node name="Daily" parent="." instance=ExtResource("3_h2yge")]
-position = Vector2(-250, 1000)
-
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.4, 0.4)
+
+[node name="Background" parent="Camera2D" instance=ExtResource("2_21xkr")]
 
 [node name="Quit" type="Node2D" parent="Camera2D"]
 position = Vector2(2250, -1200)
@@ -41,6 +38,33 @@ position = Vector2(105.5, 102.5)
 scale = Vector2(6.59375, 6.34375)
 texture = ExtResource("4_1bvp3")
 
+[node name="Collect" type="Button" parent="Camera2D"]
+offset_left = 409.0
+offset_top = 914.0
+offset_right = 752.0
+offset_bottom = 1249.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Camera2D/Collect"]
+layout_mode = 0
+offset_right = 339.0
+offset_bottom = 332.0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 60
+text = "Send
+To
+Collection"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Code" parent="Camera2D" instance=ExtResource("5_lquwl")]
+position = Vector2(-2339, -1302)
+
+[node name="Collection" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(0, 2000)
+
+[node name="Daily" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(-250, 1000)
+
 [node name="Marker2D1" type="Marker2D" parent="."]
 position = Vector2(-1700, 0)
 
@@ -58,26 +82,5 @@ position = Vector2(1750, 0)
 [node name="Deleted" type="Marker2D" parent="."]
 position = Vector2(0, 2191)
 
-[node name="Collect" type="Button" parent="."]
-offset_left = 409.0
-offset_top = 914.0
-offset_right = 752.0
-offset_bottom = 1249.0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Collect"]
-layout_mode = 0
-offset_right = 339.0
-offset_bottom = 332.0
-mouse_filter = 2
-theme_override_font_sizes/normal_font_size = 60
-text = "Send
-To
-Collection"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Code" parent="." instance=ExtResource("5_lquwl")]
-position = Vector2(-2339, -1291)
-
 [connection signal="button_down" from="Camera2D/Quit/Quit" to="." method="_on_quit_button_down"]
-[connection signal="button_down" from="Collect" to="." method="_on_collect_button_down"]
+[connection signal="button_down" from="Camera2D/Collect" to="." method="_on_collect_button_down"]

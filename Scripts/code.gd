@@ -54,9 +54,13 @@ func _CODE_REDEEM(): #TO BE COMMENBTED
 func _on_button_button_down() -> void:
 	var code = $TextEdit.text
 	if redeem_code(code):
-		var instance = dailyScene.instantiate()
+		var instance = mainScene.get_node("Daily")
+		instance._ready()
 		instance.coded = true
-		mainScene.add_child(instance)
+		instance.pulls += 3
+		instance.button_update(1.0, false)
+		instance.update_daily_save()
+		instance.label_update()
 		instance.position = Vector2(-250.0, 1000.0)
 		$TextEdit.text = "Code redeemed!"
 	else:

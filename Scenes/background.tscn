@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=3 uid="uid://dcefxn5gaiji6"]
+
+[ext_resource type="Texture2D" uid="uid://b6rahpyf37ixy" path="res://Wallpaper/Icarus_Bannerr.png" id="1_4aqey"]
+[ext_resource type="Script" uid="uid://dkrxs0eci1t4o" path="res://Scenes/background.gd" id="1_ltlj5"]
+[ext_resource type="Texture2D" uid="uid://c46s8lotmw4oi" path="res://Wallpaper/Boss_BG.png" id="2_xgxeb"]
+[ext_resource type="Texture2D" uid="uid://dmph5k06uvcl6" path="res://Wallpaper/Roach_Axe.png" id="3_ltlj5"]
+[ext_resource type="Texture2D" uid="uid://njkg47x0pndd" path="res://Wallpaper/Icarus_Potter.png" id="5_42s4r"]
+[ext_resource type="Texture2D" uid="uid://cn5ing1ra6k5p" path="res://Wallpaper/BG_Icon.png" id="5_rymcx"]
+[ext_resource type="Texture2D" uid="uid://b4yjfcaj7kek" path="res://Wallpaper/thumbnail 2.png" id="6_42s4r"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rymcx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_4aqey")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_xgxeb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ltlj5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_42s4r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_42s4r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Background" type="Node2D"]
+script = ExtResource("1_ltlj5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_rymcx")
+
+[node name="Next" type="Node2D" parent="."]
+position = Vector2(2000, -1200)
+
+[node name="Next2" type="Button" parent="Next"]
+self_modulate = Color(1, 1, 1, 0.678431)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -106.0
+offset_top = -106.0
+offset_right = 106.0
+offset_bottom = 106.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Next"]
+scale = Vector2(0.816406, 0.816406)
+texture = ExtResource("5_rymcx")
+
+[connection signal="button_down" from="Next/Next2" to="." method="_on_next_2_button_down"]
