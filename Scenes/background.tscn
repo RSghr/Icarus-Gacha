@@ -1,12 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://dcefxn5gaiji6"]
+[gd_scene load_steps=10 format=3 uid="uid://dcefxn5gaiji6"]
 
 [ext_resource type="Texture2D" uid="uid://b6rahpyf37ixy" path="res://Wallpaper/Icarus_Bannerr.png" id="1_4aqey"]
-[ext_resource type="Script" uid="uid://dkrxs0eci1t4o" path="res://Scenes/background.gd" id="1_ltlj5"]
+[ext_resource type="Script" uid="uid://dkrxs0eci1t4o" path="res://Scripts/background.gd" id="1_ltlj5"]
 [ext_resource type="Texture2D" uid="uid://c46s8lotmw4oi" path="res://Wallpaper/Boss_BG.png" id="2_xgxeb"]
 [ext_resource type="Texture2D" uid="uid://dmph5k06uvcl6" path="res://Wallpaper/Roach_Axe.png" id="3_ltlj5"]
 [ext_resource type="Texture2D" uid="uid://njkg47x0pndd" path="res://Wallpaper/Icarus_Potter.png" id="5_42s4r"]
 [ext_resource type="Texture2D" uid="uid://cn5ing1ra6k5p" path="res://Wallpaper/BG_Icon.png" id="5_rymcx"]
 [ext_resource type="Texture2D" uid="uid://b4yjfcaj7kek" path="res://Wallpaper/thumbnail 2.png" id="6_42s4r"]
+[ext_resource type="Texture2D" uid="uid://ceme1ycdnlmgq" path="res://Wallpaper/Icarus-chan.png" id="7_kopta"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rymcx"]
 animations = [{
@@ -25,6 +26,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("6_42s4r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_kopta")
 }],
 "loop": true,
 "name": &"default",

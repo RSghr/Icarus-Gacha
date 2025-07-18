@@ -66,11 +66,14 @@ func _process(_delta):
 		if $Camera2D.position.x < mouse_edge_positive:
 			if get_viewport().get_mouse_position().x > (get_viewport_rect().end.x - viewportX_limit) and  get_viewport().get_mouse_position().y > viewportY_limit:
 				$Camera2D.position.x += scroll_speed * 50
+				collection.get_node("Show").position.x += scroll_speed * 50
 		if $Camera2D.position.x > mouse_edge_negative:
 			if get_viewport().get_mouse_position().x < viewportX_limit and  get_viewport().get_mouse_position().y > viewportY_limit:
 				$Camera2D.position.x -= scroll_speed * 50
+				collection.get_node("Show").position.x -= scroll_speed * 50
 	else :
 		$Camera2D.position.x =  0
+		collection.get_node("Show").position.x = -800.0
 
 func _on_booster_animation_finished(anim_name):
 	if anim_name == "Booster_Open": 

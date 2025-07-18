@@ -12,16 +12,16 @@ func _ready():
 	mainScene = get_tree().root.get_child(0)
 	var config = ConfigFile.new()
 	var err = config.load(SAVE_PATH)
-
+	var today = get_today_string()
 	var last_press_date = ""
 	if err == OK:
 		last_press_date = config.get_value("daily", "last_pressed", "")
-		pulls = config.get_value("packs", "unopened", pulls)
 	
-	var today = get_today_string()
+	if last_press_date == today :
+		pulls = config.get_value("packs", "unopened", pulls)
 	label_update()
 	if last_press_date == today and !coded and pulls == 0:
-		button_update(0.0, false)
+		button_update(0.0, true)
 
 func get_today_string() -> String:
 	var now = Time.get_datetime_dict_from_system()
@@ -34,7 +34,7 @@ func _on_get_daily_button_down() -> void:
 	var instance = boosterScene.instantiate()
 	instance.availability = pulls
 	mainScene.add_child(instance)
-	button_update(0.0, false)
+	button_update(0.0, true)
 
 func update_daily_save():
 	var config = ConfigFile.new()

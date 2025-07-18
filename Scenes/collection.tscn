@@ -21,7 +21,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Node2D:rotation")
+tracks/1/path = NodePath("Show/Sprite2D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -48,7 +48,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Node2D:rotation")
+tracks/1/path = NodePath("Show/Sprite2D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -74,20 +74,10 @@ libraries = {
 &"": SubResource("AnimationLibrary_pv8s0")
 }
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = -924.0
-offset_top = -852.0
-offset_right = -677.0
-offset_bottom = -715.0
-theme_override_font_sizes/normal_font_size = 45
-text = "Collection"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Show" type="Node2D" parent="."]
 position = Vector2(-800, -1000)
 
-[node name="Show" type="Button" parent="Node2D"]
+[node name="Show" type="Button" parent="Show"]
 self_modulate = Color(1, 1, 1, 0)
 anchors_preset = 8
 anchor_left = 0.5
@@ -101,10 +91,19 @@ offset_bottom = 199.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/Show"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Show"]
+offset_left = -124.0
+offset_top = 148.0
+offset_right = 123.0
+offset_bottom = 285.0
+theme_override_font_sizes/normal_font_size = 45
+text = "Collection"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Show"]
 texture_filter = 1
 scale = Vector2(12.4688, 12.4688)
 texture = ExtResource("3_pv8s0")
-centered = false
 
-[connection signal="button_down" from="Node2D/Show" to="." method="_on_show_button_down"]
+[connection signal="button_down" from="Show/Show" to="." method="_on_show_button_down"]

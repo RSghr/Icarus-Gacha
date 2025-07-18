@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var bg_count = 4
+@export var bg_count = 5
 
 
 func _on_next_2_button_down() -> void:
