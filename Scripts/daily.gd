@@ -44,7 +44,8 @@ func update_daily_save():
 
 func button_update(a, disable):
 	modulate.a = a
-	$Get_Daily.disabled = disable
+	if disable:
+		dailyButton.queue_free()
 	label_update()
 	
 func label_update():

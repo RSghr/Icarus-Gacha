@@ -174,6 +174,9 @@ func randomize_Name_Grade():
 	card_edition.text = "0"
 	card_name.text = name_random()
 	card_grade.text = grade_random()
+	init_card()
+
+func init_card():
 	grade_color_picker()
 	Color_Applier()
 	Frame_Applier()
@@ -190,10 +193,7 @@ func import_vars():
 	card_name.text = card_params["name"]
 	card_grade.text = card_params["grade"]
 	card_desc.text = card_params["description"]
-	grade_color_picker()
-	Color_Applier()
-	Frame_Applier()
-	export_vars()
+	init_card()
 
 func _ready() :
 	randomize_Name_Grade()

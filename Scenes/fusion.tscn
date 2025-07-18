@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://crnvt8egu404d"]
+[gd_scene load_steps=3 format=3 uid="uid://dtgft5mywtwi5"]
 
-[ext_resource type="Texture2D" path="res://Img_Assets/Fuse_Icon.png" id="1_kx541"]
-[ext_resource type="Script" path="res://Scenes/fusion.gd" id="1_l4vvv"]
+[ext_resource type="Texture2D" uid="uid://pmfroekpo5cn" path="res://Img_Assets/Fuse_Icon.png" id="1_kx541"]
+[ext_resource type="Script" uid="uid://c382unpic40fq" path="res://Scenes/fusion.gd" id="1_l4vvv"]
 
 [node name="Fusion" type="Node2D"]
 script = ExtResource("1_l4vvv")

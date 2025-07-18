@@ -3,6 +3,13 @@ extends Node2D
 var shown = false
 var card_list = []
 
+var fusionScene = load("res://Scenes/fusion.tscn")
+var mainScene
+
+func _ready():
+	mainScene = get_tree().root.get_child(0)
+	
+
 func save_cards():
 	create_dir()
 	var data = {"cards": card_list}
@@ -59,9 +66,59 @@ func save_cards_list():
 	card_list.clear()
 	for categ in get_child(0).get_children():
 		if categ.get_child_count() > 0:
-			card_list.append(categ.get_child(0).card_params)
+			for card in categ.get_children():
+				if "toDestroy" in card:
+					card_list.append(card.card_params)
 	save_cards()
+	look_for_duplicates()
 	
+func look_for_duplicates():
+	var duplicate_list = []
+	var grade_in_categ = []
+	for categ in get_child(0).get_children():
+		if categ.get_child_count() > 0:
+			grade_in_categ = dupes_in_categ(categ.get_children())
+			if grade_in_categ.size() > 0:
+				for grade in grade_in_categ:
+					for card in categ.get_children():
+						if "toDestroy" in card :
+							if card.card_params["grade"] == grade and !(fusion_exists_categ(categ)):
+								duplicate_list.append(card)
+					if duplicate_list.size() > 2:
+						var instance = fusionScene.instantiate()
+						for i in range(0,duplicate_list.size()):
+							instance.fusion_list.append(duplicate_list[i])
+						categ.add_child(instance)
+						instance.grade_text.text = instance.fusion_list[0].card_params["grade"]
+						instance.current_rarity = instance.fusion_list[0].card_params["grade"]
+						instance.position = categ.get_child(0).position
+						instance.position.y += 500 
+					duplicate_list.clear()
+		order_fuse_buttons(categ)
+	mainScene.collection_grade_sorter()
+	
+
+func order_fuse_buttons(categ):
+	var offset = 0
+	for nodes in categ.get_children():
+		if "fusion_list" in nodes:
+			nodes.position.y += offset
+			offset += 110
+
+func fusion_exists_categ(categ):
+	for nodes in categ.get_children():
+		if "fusion_list" in nodes:
+			return true
+	return false
+
+func dupes_in_categ(categ_list):
+		var grade_list = []
+		for card in categ_list:
+			if "toDestroy" in card:
+				if !(card.card_params["grade"] in grade_list):
+					grade_list.append(card.card_params["grade"])
+		return grade_list
+		
 func Reset(event):
 	if event.is_action_pressed("Reset"):
 		for categ in get_child(0).get_children():
