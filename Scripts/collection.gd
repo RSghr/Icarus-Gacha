@@ -71,6 +71,7 @@ func Reset(event):
 		delete_save()
 
 func _on_show_button_down() -> void:
+	get_tree().root.get_child(0)._on_collect_button_down()
 	if !shown :
 		$AnimationPlayer.play("Collection_Show")
 		shown = true

@@ -39,17 +39,17 @@ scale = Vector2(6.59375, 6.34375)
 texture = ExtResource("4_1bvp3")
 
 [node name="Collect" type="Button" parent="Camera2D"]
-offset_left = 409.0
-offset_top = 914.0
-offset_right = 752.0
-offset_bottom = 1249.0
+offset_left = 1671.0
+offset_top = -1306.0
+offset_right = 1888.0
+offset_bottom = -1094.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Camera2D/Collect"]
 layout_mode = 0
-offset_right = 339.0
-offset_bottom = 332.0
+offset_right = 216.0
+offset_bottom = 212.0
 mouse_filter = 2
-theme_override_font_sizes/normal_font_size = 60
+theme_override_font_sizes/normal_font_size = 40
 text = "Send
 To
 Collection"

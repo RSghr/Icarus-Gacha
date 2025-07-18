@@ -178,4 +178,5 @@ func _on_collect_button_down() -> void:
 	collection.save_cards_list()
 
 func _on_quit_button_down() -> void:
+	_on_collect_button_down()
 	get_tree().quit()
