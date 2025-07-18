@@ -58,7 +58,7 @@ var Name_list = {
 
 var desc_list = {
 	"Masterful baker when not on missions, he brings bread instead of extra magazines. He knows where the hellbomb is." : 0,																						#0
-	"Her messed up sleep schedule allows her to deploy at times when the enemy expects the least it.\nShe packs an extra hellbomb but she never let anyone know where it is hidden." : 1,							#1
+	"Her messed up sleep schedule allows her to deploy at times when the enemy expects it the least.\nShe packs an extra hellbomb but she never let anyone know where it is hidden." : 1,							#1
 	"He is a methodical killer, expert in laser weaponry, and he loves to spend his 2.4 seconds of free time with his pet Jowie.\nJowie is a good corgi." : 2,														#2
 	"No matter who she's facing, with the giant Greatsword in her hand, she will scream \"woMEN GO IN!!\" and charge straight into battle." : 3,																	#5
 	"SEAF usually chant a traditionnal chime when they get a glance of her, it goes like : \"Tu Tu Tu TURU MAX VERSTAPPEN!\" " : 4,																					#9
@@ -67,7 +67,8 @@ var desc_list = {
 	"She is quite reserved but cares deeply about her comrades, she can go above and beyond for them.\nHer only flaw, is that she doesn't know how to respond to compliments without fleeing the scene." : 7,		#7
 	"Helps out in the bakery, she is known as the \"MASTER BAKER\", but also as the leader of Icarus squad. She's ready to carry the burden of her allies anytime." : 8,											#8
 	"Sometimes you can hear her evil laugh down the hallways of the destroyer...\nNever trust her when she says \"I have a plan, hear me out\"." : 9,                    											#4
-	"Holy shit her boobs are huge!" : 10      																																										#10
+	"Holy shit her boobs are huge!" : 10,      																																										#10
+	"R̵̨̄Ẹ̴̑D̸͎͐͋A̴̞̎C̸̻̒T̷̥͐̋E̸̦͋D̷̨͓̆" : 11																																																		#11
 }
 
 var Grade_Chance = [
@@ -92,6 +93,18 @@ var Grade_list = [
 	"S+"
 ]
 
+var color_list = {
+	"F" : Color.WEB_GRAY,
+	"E" : Color.WEB_GRAY,
+	"D" : Color.WEB_GREEN,
+	"C" : Color.WEB_GREEN,
+	"B" : Color.BLUE,
+	"A" : Color.DEEP_PINK,
+	"S" : Color.GOLDENROD,
+	"S+": Color.FIREBRICK,
+	"Z"	: Color.BLACK
+}
+
 func grade_random():
 	var r = randi_range(1, 4900)
 	var cumulative = 0
@@ -111,23 +124,11 @@ func name_random():
 		if r < cumulative:
 			card_desc.text = desc_list.find_key(i)
 			return Name_list.find_key(i)
+	card_desc.text = desc_list.find_key(-1)
 	return "GLITCHED"
 
 func grade_color_picker():
-	if card_grade.text == "F" or card_grade.text == "E":
-		grade_color = Color.WEB_GRAY
-	if card_grade.text == "D" or card_grade.text == "C":
-		grade_color = Color.WEB_GREEN
-	if card_grade.text == "B":
-		grade_color = Color.BLUE
-	if card_grade.text == "A":
-		grade_color = Color.DEEP_PINK
-	if card_grade.text == "S":
-		grade_color = Color.GOLDENROD
-	if card_grade.text == "S+":
-		grade_color = Color.FIREBRICK
-	if card_grade.text == "Z":
-		grade_color = Color.BLACK
+	grade_color = color_list[card_grade.text]
 
 func Color_Applier():
 	card_frame.modulate = grade_color
@@ -146,6 +147,28 @@ func Frame_Applier():
 	else:
 		var r = randi_range(0, 11)
 		character.frame = r
+		card_desc.text = desc_list.find_key(11)
+		glitched_color_applier()
+
+func glitched_color_applier():
+	var r = randi_range(0, Grade_list.size() - 1)
+	var glitched_color = color_list[Grade_list[r]]
+	card_frame.modulate = glitched_color
+	r = randi_range(0, Grade_list.size() - 1)
+	glitched_color = color_list[Grade_list[r]]
+	card_name.modulate = glitched_color
+	r = randi_range(0, Grade_list.size() - 1)
+	glitched_color = color_list[Grade_list[r]]
+	card_desc.modulate = glitched_color
+	if Grade_list[r] == "Z":
+		card_desc.modulate = Color.GRAY
+	r = randi_range(0, Grade_list.size() - 1)
+	glitched_color = color_list[Grade_list[r]]
+	card_grade.modulate = glitched_color
+	r = randi_range(0, Grade_list.size() - 1)
+	glitched_color = color_list[Grade_list[r]]
+	card_shine.modulate = glitched_color
+	card_shine.get_child(0).modulate.a = 0
 
 func randomize_Name_Grade():
 	card_edition.text = "0"
