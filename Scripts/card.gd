@@ -1,16 +1,18 @@
 extends Node2D
 
+#Catching the variable of all important objects
 @onready var card = $"."
 @onready var card_frame = $Frame
 @onready var character = $Character_Frame
 @onready var card_shine = $Shine
-var card_shine_anim
+@onready var card_shine_anim = $Shine/AnimationPlayer
 @onready var card_name = $Name
 @onready var card_grade = $Grade
 @onready var card_desc = $Description
 @onready var card_edition = $Edition
 @onready var anim_player = $AnimationPlayer
 
+#Basic parameters saved EDITING STRUCTURE MAY BREAK SAVES
 var card_params = {
 	"grade": "F",
 	"name": "Pyro",
@@ -18,16 +20,17 @@ var card_params = {
 	"description": "Placeholder"
 }
 
-
+#Card variables
 var flipped = false
 var grade_color = Color.WHITE
-var toDestroy := true
+var toDestroy := true # Used as last resort to detect if it's a card
 
 #InspectVars
 var inspected = false
 var inspect_pos = null
 var eyeing = false
 
+#Gacha Name chance
 var Name_Chance = [
 	50,                     #0 : 500
 	40,                   	#1 : 900
@@ -42,6 +45,7 @@ var Name_Chance = [
 	1       				#10: 2900
 ]	
 
+#Gacha Name List
 var Name_list = {
 	"Pyro" : 0,                      #0
 	"Magpie" : 1,                    #1
@@ -56,6 +60,7 @@ var Name_list = {
 	"Roach Summer Edition" : 10      #10
 }
 
+#Gacha Desc List
 var desc_list = {
 	"Masterful baker when not on missions, he brings bread instead of extra magazines. He knows where the hellbomb is." : 0,																						#0
 	"Her messed up sleep schedule allows her to deploy at times when the enemy expects it the least.\nShe packs an extra hellbomb but she never let anyone know where it is hidden." : 1,							#1
@@ -71,6 +76,7 @@ var desc_list = {
 	"R̵̨̄Ẹ̴̑D̸͎͐͋A̴̞̎C̸̻̒T̷̥͐̋E̸̦͋D̷̨͓̆" : 11																																																		#11
 }
 
+#Gacha Grade chance
 var Grade_Chance = [
 	100,          # F : 1000
 	150,          # E : 2500
@@ -82,6 +88,7 @@ var Grade_Chance = [
 	1            # S+: 4900
 ]
 
+#Gacha Grade List
 var Grade_list = [
 	"F",
 	"E",
@@ -93,6 +100,7 @@ var Grade_list = [
 	"S+"
 ]
 
+#Color code
 var color_list = {
 	"F" : Color.WEB_GRAY,
 	"E" : Color.WEB_GRAY,
@@ -105,6 +113,7 @@ var color_list = {
 	"Z"	: Color.BLACK
 }
 
+#Generate random grade to the card
 func grade_random():
 	var r = randi_range(1, 4900)
 	var cumulative = 0
@@ -115,6 +124,7 @@ func grade_random():
 			return Grade_list[i]
 	return "Z"
 
+#Generate random name for the card, along side its description
 func name_random():
 	var r = randi_range(1, 2900)
 	var cumulative = 0
@@ -124,12 +134,13 @@ func name_random():
 		if r < cumulative:
 			card_desc.text = desc_list.find_key(i)
 			return Name_list.find_key(i)
-	card_desc.text = desc_list.find_key(-1)
 	return "GLITCHED"
 
+#Get the color depending on its grade
 func grade_color_picker():
 	grade_color = color_list[card_grade.text]
 
+#Color grade applier
 func Color_Applier():
 	card_frame.modulate = grade_color
 	card_name.modulate = grade_color
@@ -140,6 +151,7 @@ func Color_Applier():
 	card_shine.modulate = grade_color
 	card_shine.get_child(0).modulate.a = 0
 
+#Text frame applier
 func Frame_Applier():
 	if card_name.text in Name_list:
 		character.frame = Name_list[card_name.text]
@@ -147,9 +159,10 @@ func Frame_Applier():
 	else:
 		var r = randi_range(0, 11)
 		character.frame = r
-		card_desc.text = desc_list.find_key(11)
+		card_desc.text = desc_list.find_key(11) # GLITCHED DESCRIPTION
 		glitched_color_applier()
 
+#Specific card when glitched is generated : VERY RARE
 func glitched_color_applier():
 	var r = randi_range(0, Grade_list.size() - 1)
 	var glitched_color = color_list[Grade_list[r]]
@@ -170,51 +183,60 @@ func glitched_color_applier():
 	card_shine.modulate = glitched_color
 	card_shine.get_child(0).modulate.a = 0
 
+#Call the random card generators (Name & Grade)
 func randomize_Name_Grade():
 	card_edition.text = "0"
 	card_name.text = name_random()
 	card_grade.text = grade_random()
+	init_card()
+
+#Apply the colors and texts, then updates the card_params for the save
+func init_card():
 	grade_color_picker()
 	Color_Applier()
 	Frame_Applier()
 	export_vars()
-	
+
+#Update the value of card_params for the save
 func export_vars():
 	card_params["name"] = card_name.text
 	card_params["grade"] = card_grade.text
 	card_params["edition"] = card_edition.text
 	card_params["description"] = card_desc.text
 
+#Get the card values from its save variable
 func import_vars():
 	card_edition.text = card_params["edition"]
 	card_name.text = card_params["name"]
 	card_grade.text = card_params["grade"]
 	card_desc.text = card_params["description"]
-	grade_color_picker()
-	Color_Applier()
-	Frame_Applier()
-	export_vars()
+	init_card()
 
+#On ready, randomize card.
 func _ready() :
 	randomize_Name_Grade()
-	card_shine_anim = card_shine.get_child(1)
 
+#Action flipping the card
 func flip_card():
 	if !flipped:
 		anim_player.play("Card_Flip")
 		flipped = true
 
+#Flipping the card button
 func _on_button_button_down():
 	flip_card()
 	
+#when the card is hovered, apply shine effect
 func _on_button_mouse_entered() -> void:
 	if !flipped :
 		card_shine_anim.play("Shine_Appear")
 
+#when the card is NOT hovered, fade shine effect
 func _on_button_mouse_exited() -> void:
 	if !flipped :
 		card_shine_anim.play_backwards("Shine_Appear")
 
+#Inspect button, put it at the center of the screen
 func _on_inspect_button_down() -> void:
 	if !inspected :
 		inspect_pos = global_position
@@ -235,7 +257,7 @@ func _on_inspect_button_down() -> void:
 		inspected = false
 	
 
-
+#fade the frame while inspecting
 func _on_eye_button_down() -> void:
 	if inspected and !eyeing:
 		card_frame.visible = false
