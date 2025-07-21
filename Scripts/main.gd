@@ -1,7 +1,12 @@
 extends Node2D
 
+#Scene objects
 var cardScene = load("res://Scenes/Card.tscn")
 var boosterScene = load("res://Scenes/booster.tscn")
+
+#Catching the variable of all important objects
+@onready var collection = $Collection
+@onready var daily = $Daily
 @onready var marker_nodes = [
 	$Marker2D1,
 	$Marker2D2,
@@ -10,14 +15,13 @@ var boosterScene = load("res://Scenes/booster.tscn")
 	$Marker2D5
 ]
 
-@onready var collection = $Collection
-@onready var daily = $Daily
-
+#Camera handling
 @export var scroll_speed: float = 0.7
 var mouse_edge = 3000.0
 var mouse_edge_positive = mouse_edge
 var mouse_edge_negative = mouse_edge * -1
 
+#Load the save, and generate the cards in the collection
 func create_collection():
 	var card_list_params = collection.load_cards()
 	for card_params in card_list_params:
@@ -30,12 +34,15 @@ func create_collection():
 		instance.get_node("Back").visible = false
 		card_sorter()
 
+#On ready, look for collection
 func _ready():
 	create_collection()
 
+#link animation of booster for its finish state
 func link_anim(anim):
 	anim.animation_finished.connect(_on_booster_animation_finished)
 
+#Camera handling, allow scroll only when showing collection
 func _process(_delta):
 	if collection.shown :
 		var viewportX_limit = get_viewport_rect().end.x / 5
@@ -52,10 +59,13 @@ func _process(_delta):
 		$Camera2D.position.x =  0
 		collection.get_node("Show").position.x = -800.0
 
+#When booster opened, spawn X card on screen
 func _on_booster_animation_finished(anim_name):
 	if anim_name == "Booster_Open": 
 			spawn_cards_to_markers()
 
+#Spawn randomly generated cards on specific markers
+#Manage daily pulls available.
 func spawn_cards_to_markers():
 	for marker in marker_nodes:
 		var instance = cardScene.instantiate()
@@ -70,6 +80,7 @@ func spawn_cards_to_markers():
 	if $Booster.availability == 0:
 		$Booster.queue_free()
 
+#Sending cards to the collection, depending on which name they belong to
 func card_sorter():
 	for cards in $Deleted.get_children():
 		var category = collection.get_child(0).find_child(cards.card_params["name"])
@@ -78,6 +89,7 @@ func card_sorter():
 		tween.tween_property(cards, "position", category.global_position, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		cards.reparent(category)
 
+#Sorting the card grades from lowest (first child) to Highest (last child).
 func collection_grade_sorter():
 	for categ in collection.get_child(0).get_children():
 		if categ.get_child_count() > 0:
@@ -90,6 +102,7 @@ func collection_grade_sorter():
 						categ.move_child(cards,0)
 						max_grade = cards.card_grade.text
 
+#Grade sorter logic
 func _sort_grade(a, b) -> bool:  
 	match a:
 		"F":
@@ -136,9 +149,10 @@ func _sort_grade(a, b) -> bool:
 			return false
 	return false
 
+#Sending cards to collection, calling the sorting functions and saving the collection
 func _on_collect_button_down() -> void:
 	collection_grade_sorter()
-	#collection.clear_less_grade()
+	collection.clear_less_grade()
 	for i in range(1,6):
 		var mark = get_node("Marker2D" + str(i))
 		for child in mark.get_children():
@@ -152,9 +166,10 @@ func _on_collect_button_down() -> void:
 			nodes.reparent($Deleted)
 	card_sorter()
 	collection_grade_sorter()
-	#collection.clear_less_grade()
+	collection.clear_less_grade()
 	collection.save_cards_list()
 
+#Quit the game
 func _on_quit_button_down() -> void:
 	_on_collect_button_down()
 	get_tree().quit()

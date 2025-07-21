@@ -6,10 +6,11 @@ var card_list = []
 var fusionScene = load("res://Scenes/fusion.tscn")
 var mainScene
 
+#On ready find the main scene
 func _ready():
 	mainScene = get_tree().root.get_child(0)
 	
-
+#Save collection in file
 func save_cards():
 	create_dir()
 	var data = {"cards": card_list}
@@ -19,6 +20,7 @@ func save_cards():
 	file.store_string(JSON.stringify(data))
 	file.close()
 	
+#Erase file
 func delete_save():
 	if FileAccess.file_exists("user://Icarus_Gacha/save_cards.json"):
 		var dir = DirAccess.open("user://Icarus_Gacha/")
@@ -30,6 +32,7 @@ func delete_save():
 	else:
 		print("No save file to delete.")
 
+#Create directory if it doesn't exist
 func create_dir():
 	var dir = DirAccess.open("user://")
 
@@ -42,6 +45,7 @@ func create_dir():
 	else:
 		print("Folder already exists.")
 
+#Load cards in collection
 func load_cards() -> Array:
 	create_dir()
 	if not FileAccess.file_exists("user://Icarus_Gacha/save_cards.json"):
@@ -55,6 +59,7 @@ func load_cards() -> Array:
 		return []
 	return result["cards"]
 
+#Delete cards that have a lesser grade
 func clear_less_grade():
 	for categ in get_child(0).get_children():
 		var childnum = categ.get_child_count()
@@ -62,6 +67,7 @@ func clear_less_grade():
 			categ.get_child(0).queue_free()
 			childnum -= 1
 
+#save list of cards
 func save_cards_list():
 	card_list.clear()
 	for categ in get_child(0).get_children():
@@ -70,8 +76,9 @@ func save_cards_list():
 				if "toDestroy" in card:
 					card_list.append(card.card_params)
 	save_cards()
-	look_for_duplicates()
-	
+	#look_for_duplicates #0.4.6 no fusion yet
+
+#Check for duplicate cards, 3 of them allow a fusion
 func look_for_duplicates():
 	var duplicate_list = []
 	var grade_in_categ = []
@@ -97,7 +104,7 @@ func look_for_duplicates():
 		order_fuse_buttons(categ)
 	mainScene.collection_grade_sorter()
 	
-
+#offset the buttons to show in a cascade vertically
 func order_fuse_buttons(categ):
 	var offset = 0
 	for nodes in categ.get_children():
@@ -105,12 +112,14 @@ func order_fuse_buttons(categ):
 			nodes.position.y += offset
 			offset += 110
 
+#Check if the fusion button exist in the category
 func fusion_exists_categ(categ):
 	for nodes in categ.get_children():
 		if "fusion_list" in nodes:
 			return true
 	return false
 
+#Find the duplicates in the category
 func dupes_in_categ(categ_list):
 		var grade_list = []
 		for card in categ_list:
@@ -119,6 +128,7 @@ func dupes_in_categ(categ_list):
 					grade_list.append(card.card_params["grade"])
 		return grade_list
 		
+#Reset Collection - Not used
 func Reset(event):
 	if event.is_action_pressed("Reset"):
 		for categ in get_child(0).get_children():
@@ -127,6 +137,7 @@ func Reset(event):
 		card_list.clear()
 		delete_save()
 
+#Show collection
 func _on_show_button_down() -> void:
 	get_tree().root.get_child(0)._on_collect_button_down()
 	if !shown :

@@ -4,6 +4,7 @@ extends Node2D
 @export var current_rarity = "F"
 @onready var grade_text = $Grade
 
+#Return the next rarity
 func next_rarity(rarity):
 	match rarity:
 		"F":
@@ -26,6 +27,7 @@ func next_rarity(rarity):
 			return "Z"
 	return "Z"
 
+#Find the highest edition of cards to fuse into
 func highest_edition(card_list):
 	var card_max_edition = card_list[0]
 	for card in card_list:
@@ -33,6 +35,7 @@ func highest_edition(card_list):
 			card_max_edition = card
 	return card_max_edition
 
+#Fusing cards logic
 func fuse_cards():
 	if fusion_list.size() > 2 :
 		var car_fused = highest_edition(fusion_list)
@@ -45,6 +48,7 @@ func fuse_cards():
 		car_fused.init_card()
 		fusion_list.clear()
 
+#Call the fusion cards functions
 func _on_fusion_button_down() -> void:
 	fuse_cards()
 	get_parent().get_parent().get_parent().save_cards()
