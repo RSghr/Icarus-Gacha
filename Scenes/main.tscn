@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://p3ddn3cvbqky"]
+[gd_scene load_steps=12 format=3 uid="uid://p3ddn3cvbqky"]
 
 [ext_resource type="Script" uid="uid://bqpwdij22amcr" path="res://Scripts/main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://o1am6pwlvb" path="res://Scenes/collection.tscn" id="2_0xm2m"]
@@ -7,8 +7,23 @@
 [ext_resource type="Texture2D" uid="uid://q5ui0612lhb2" path="res://Img_Assets/Chevron.png" id="4_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://dlllmrxvqebnn" path="res://Img_Assets/Refresh.png" id="4_6bp64"]
 [ext_resource type="PackedScene" uid="uid://bcrh73ga5alpv" path="res://Scenes/code.tscn" id="5_lquwl"]
+[ext_resource type="Texture2D" uid="uid://depat21qvojgr" path="res://Img_Assets/Slow.png" id="7_hptm8"]
 [ext_resource type="PackedScene" uid="uid://butvakuo7nhsb" path="res://Scenes/adhd_player.tscn" id="7_ynf5e"]
 [ext_resource type="Texture2D" uid="uid://c23fpp2ff232e" path="res://Img_Assets/FastForward.png" id="8_344ge"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d1ilt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_hptm8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_344ge")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_0xm2m")
@@ -66,10 +81,10 @@ offset_right = 218.0
 offset_bottom = 212.0
 toggle_mode = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Camera2D/Speedup"]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Camera2D/Speedup"]
 position = Vector2(108, 105)
-scale = Vector2(0.828125, 0.828125)
-texture = ExtResource("8_344ge")
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_d1ilt")
 
 [node name="Collection" parent="." instance=ExtResource("2_0xm2m")]
 position = Vector2(0, 2000)

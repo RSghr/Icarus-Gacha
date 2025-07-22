@@ -182,10 +182,13 @@ func _on_quit_button_down() -> void:
 func _on_button_toggled(toggled_on: bool) -> void:
 	var anim_players = get_tree().get_nodes_in_group("AnimationPlayers")
 	if toggled_on :
+		$Camera2D/Speedup/Sprite2D.frame = 1
 		for anim_player in anim_players:
 			curr_pb_speed = pb_speed
 			_set_playback_speed(anim_player, curr_pb_speed)
 	else :
+		$Camera2D/Speedup/Sprite2D.scale = Vector2(0.8,0.8)
+		$Camera2D/Speedup/Sprite2D.frame = 0
 		for anim_player in anim_players:
 			curr_pb_speed = 1.0
 			_set_playback_speed(anim_player, curr_pb_speed)
