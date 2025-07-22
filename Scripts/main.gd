@@ -173,6 +173,7 @@ func _on_collect_button_down() -> void:
 	collection_grade_sorter()
 	#collection.clear_less_grade()
 	collection.save_cards_list()
+	collection._fusion_sorter()
 
 #Quit the game
 func _on_quit_button_down() -> void:

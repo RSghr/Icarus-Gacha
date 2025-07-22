@@ -71,6 +71,7 @@ func _Custom_Redeem(code):
 		mainScene.adhd_player.play_ADHD_Videos()
 	if code == "stop" :
 		mainScene.adhd_player.stop_curr_vid()
+
 #Code redeem logic, show daily object if true
 func _on_button_button_down() -> void:
 	var code = $TextEdit.text

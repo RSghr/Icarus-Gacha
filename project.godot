@@ -18,6 +18,8 @@ config/icon="res://Img_Assets/icon.svg"
 [display]
 
 window/size/mode=3
+mouse_cursor/custom_image="uid://43lypxbcq8sb"
+mouse_cursor/custom_image_hotspot=Vector2(0, 20)
 
 [editor_plugins]
 

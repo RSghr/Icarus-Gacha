@@ -100,12 +100,19 @@ func look_for_duplicates():
 						categ.add_child(instance)
 						instance.grade_text.text = instance.fusion_list[0].card_params["grade"]
 						instance.current_rarity = instance.fusion_list[0].card_params["grade"]
-						instance.position = categ.get_child(0).position
-						instance.position.y += 500 
+						
 					duplicate_list.clear()
 		#order_fuse_buttons(categ)
+	_fusion_sorter()
 	mainScene.collection_grade_sorter()
-	
+
+func _fusion_sorter():
+	for categ in get_child(0).get_children():
+		if categ.get_child_count() > 0:
+			for fusionButton in categ.get_children():
+				if "fusion_list" in fusionButton:
+					fusionButton.position = fusionButton.get_parent().get_child(0).position
+					fusionButton.position.y += 500 
 
 #offset the buttons to show in a cascade vertically
 #Not used as only one fusion button is summoned at a time
