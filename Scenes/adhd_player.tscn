@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://butvakuo7nhsb"]
+
+[ext_resource type="Script" uid="uid://c4sohwae1x66x" path="res://Scripts/adhd_player.gd" id="1_7qldu"]
+[ext_resource type="Texture2D" uid="uid://c23fpp2ff232e" path="res://Img_Assets/FastForward.png" id="2_6tae7"]
+
+[sub_resource type="VideoStreamTheora" id="VideoStreamTheora_6tae7"]
+
+[node name="ADHDPlayer" type="Node2D"]
+script = ExtResource("1_7qldu")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -683.0
+offset_right = 683.0
+offset_bottom = 768.0
+grow_horizontal = 2
+stream = SubResource("VideoStreamTheora_6tae7")
+expand = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_6tae7")
+
+[connection signal="finished" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]

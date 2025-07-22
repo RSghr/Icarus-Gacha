@@ -5,6 +5,7 @@ var cardScene = load("res://Scenes/Card.tscn")
 var boosterScene = load("res://Scenes/booster.tscn")
 
 #Catching the variable of all important objects
+@onready var adhd_player = $Camera2D/ADHDPlayer
 @onready var collection = $Collection
 @onready var daily = $Daily
 @onready var marker_nodes = [
@@ -17,6 +18,8 @@ var boosterScene = load("res://Scenes/booster.tscn")
 
 #Camera handling
 @export var scroll_speed: float = 0.7
+@export var pb_speed: float =  5.0
+var curr_pb_speed: float = 1.0
 var mouse_edge = 3000.0
 var mouse_edge_positive = mouse_edge
 var mouse_edge_negative = mouse_edge * -1
@@ -71,6 +74,7 @@ func spawn_cards_to_markers():
 		var instance = cardScene.instantiate()
 		instance.position = global_position
 		add_child(instance)
+		instance.anim_player.speed_scale = curr_pb_speed
 		# Animate movement to marker
 		var tween = create_tween()
 		tween.tween_property(instance, "position", marker.global_position, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
@@ -100,12 +104,13 @@ func collection_grade_sorter():
 					var b = max_grade
 					if _sort_grade(a,b):
 						categ.move_child(cards,0)
+					else:
 						max_grade = cards.card_grade.text
 
 #Grade sorter logic
 func _sort_grade(a, b) -> bool:  
 	match a:
-		"F":
+		"F":	
 			if b =="Z" or b == "S+" or b == "S" or b == "A" or b == "B" or b == "C" or b == "D" or b == "E" :
 				return true
 			else:
@@ -152,7 +157,7 @@ func _sort_grade(a, b) -> bool:
 #Sending cards to collection, calling the sorting functions and saving the collection
 func _on_collect_button_down() -> void:
 	collection_grade_sorter()
-	collection.clear_less_grade()
+	#collection.clear_less_grade()
 	for i in range(1,6):
 		var mark = get_node("Marker2D" + str(i))
 		for child in mark.get_children():
@@ -166,10 +171,24 @@ func _on_collect_button_down() -> void:
 			nodes.reparent($Deleted)
 	card_sorter()
 	collection_grade_sorter()
-	collection.clear_less_grade()
+	#collection.clear_less_grade()
 	collection.save_cards_list()
 
 #Quit the game
 func _on_quit_button_down() -> void:
 	_on_collect_button_down()
 	get_tree().quit()
+
+func _on_button_toggled(toggled_on: bool) -> void:
+	var anim_players = get_tree().get_nodes_in_group("AnimationPlayers")
+	if toggled_on :
+		for anim_player in anim_players:
+			curr_pb_speed = pb_speed
+			_set_playback_speed(anim_player, curr_pb_speed)
+	else :
+		for anim_player in anim_players:
+			curr_pb_speed = 1.0
+			_set_playback_speed(anim_player, curr_pb_speed)
+			
+func _set_playback_speed(animation, pb_speed):
+	animation.speed_scale = pb_speed

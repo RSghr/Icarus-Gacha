@@ -165,7 +165,7 @@ animations = [{
 [node name="Card" type="Node2D"]
 script = ExtResource("1_qn8yl")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." groups=["AnimationPlayers"]]
 libraries = {
 &"": SubResource("AnimationLibrary_ku05v")
 }

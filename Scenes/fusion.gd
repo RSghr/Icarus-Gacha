@@ -52,4 +52,5 @@ func fuse_cards():
 func _on_fusion_button_down() -> void:
 	fuse_cards()
 	get_parent().get_parent().get_parent().save_cards()
+	get_parent().get_parent().get_parent().look_for_duplicates()
 	queue_free()

@@ -239,7 +239,7 @@ texture = ExtResource("2_ntnxt")
 [node name="Booster_Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("3_geh36")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." groups=["AnimationPlayers"]]
 libraries = {
 &"": SubResource("AnimationLibrary_yvux7")
 }

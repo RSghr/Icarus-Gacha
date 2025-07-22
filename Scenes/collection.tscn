@@ -69,7 +69,7 @@ script = ExtResource("1_vysnj")
 
 [node name="Card_Category" parent="." instance=ExtResource("1_op31q")]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." groups=["AnimationPlayers"]]
 libraries = {
 &"": SubResource("AnimationLibrary_pv8s0")
 }

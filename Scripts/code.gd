@@ -8,7 +8,7 @@ var mainScene
 #On ready print today's code Redeem
 func _ready():
 	mainScene = get_tree().root.get_child(0)
-	#for cpt in range(0,7):
+	#for cpt in range(0,7): #Generate codes for the whole week
 		#_CODE_REDEEM(cpt) #Keep commented prints the code to redeem. for Admin only
 
 #Generate the code based on the date and secret key
@@ -34,6 +34,7 @@ func hash_string(input: String) -> int:
 func redeem_code(user_input: String, days) -> bool:
 	var correct_code = generate_daily_code(days)
 	if user_input.strip_edges().to_upper() != correct_code:
+		_Custom_Redeem(user_input)
 		return false  # Wrong code
 
 	# Check if already used
@@ -56,18 +57,40 @@ func _CODE_REDEEM(days): #TO BE COMMENTED
 	config.set_value("CODE", get_today_string(days), generate_daily_code(days))
 	config.save(path)
 
+func _Custom_Redeem(code):
+	var config = ConfigFile.new()
+	var path = "user://Icarus_Gacha/redeem_log.cfg"
+	config.load(path)
+	var used = config.get_value("OTC", "redeemed", false)
+	if code == "0.5.0 is here" and !used:
+		_Create_pulls(10)
+		config.load(path)
+		config.set_value("OTC", "redeemed", true)
+		config.save(path)
+	if code == "ADHD" :
+		mainScene.adhd_player.play_ADHD_Videos()
+	if code == "stop" :
+		mainScene.adhd_player.stop_curr_vid()
 #Code redeem logic, show daily object if true
 func _on_button_button_down() -> void:
 	var code = $TextEdit.text
-	if redeem_code(code, 7):
-		var instance = mainScene.get_node("Daily")
-		instance._ready()
-		instance.coded = true
-		instance.pulls += 3
-		instance.button_update(1.0, false)
-		instance.update_daily_save()
-		instance.label_update()
-		instance.position = Vector2(-250.0, 1000.0)
-		$TextEdit.text = "Code redeemed!"
+	if redeem_code(code, 0):
+		_Create_pulls(3)
 	else:
-		$TextEdit.text = "Invalid or already used\n code."
+		$TextEdit.text = ""
+		$TextEdit.placeholder_text = "Invalid or already used."
+
+func _Create_pulls(pulls):
+	var instance = mainScene.get_node("Daily")
+	instance._ready()
+	instance.coded = true
+	instance.pulls += pulls
+	instance.button_update(1.0, false)
+	instance.update_daily_save()
+	instance.label_update()
+	instance.position = Vector2(-250.0, 1000.0)
+	$TextEdit.text = "Code redeemed!"
+
+
+func _on_text_edit_text_submitted(new_text: String) -> void:
+	_on_button_button_down()

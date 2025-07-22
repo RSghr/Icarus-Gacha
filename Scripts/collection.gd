@@ -74,9 +74,11 @@ func save_cards_list():
 		if categ.get_child_count() > 0:
 			for card in categ.get_children():
 				if "toDestroy" in card:
+					mainScene.collection_grade_sorter()
 					card_list.append(card.card_params)
 	save_cards()
-	#look_for_duplicates #0.4.6 no fusion yet
+	look_for_duplicates()
+	mainScene.collection_grade_sorter()
 
 #Check for duplicate cards, 3 of them allow a fusion
 func look_for_duplicates():
@@ -101,10 +103,12 @@ func look_for_duplicates():
 						instance.position = categ.get_child(0).position
 						instance.position.y += 500 
 					duplicate_list.clear()
-		order_fuse_buttons(categ)
+		#order_fuse_buttons(categ)
 	mainScene.collection_grade_sorter()
 	
+
 #offset the buttons to show in a cascade vertically
+#Not used as only one fusion button is summoned at a time
 func order_fuse_buttons(categ):
 	var offset = 0
 	for nodes in categ.get_children():

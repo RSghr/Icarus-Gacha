@@ -49,8 +49,7 @@ func update_daily_save():
 #if it was already claimed, just hide it
 func button_update(a, disable):
 	modulate.a = a
-	if disable:
-		dailyButton.queue_free()
+	dailyButton.disabled = disable
 	label_update()
 
 #Update the number of packs left to open

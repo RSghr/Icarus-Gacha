@@ -1,11 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://p3ddn3cvbqky"]
+[gd_scene load_steps=10 format=3 uid="uid://p3ddn3cvbqky"]
 
 [ext_resource type="Script" uid="uid://bqpwdij22amcr" path="res://Scripts/main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://o1am6pwlvb" path="res://Scenes/collection.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://dcefxn5gaiji6" path="res://Scenes/background.tscn" id="2_21xkr"]
 [ext_resource type="PackedScene" uid="uid://7imb5eg5an35" path="res://Scenes/daily.tscn" id="3_h2yge"]
 [ext_resource type="Texture2D" uid="uid://q5ui0612lhb2" path="res://Img_Assets/Chevron.png" id="4_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://dlllmrxvqebnn" path="res://Img_Assets/Refresh.png" id="4_6bp64"]
 [ext_resource type="PackedScene" uid="uid://bcrh73ga5alpv" path="res://Scenes/code.tscn" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://butvakuo7nhsb" path="res://Scenes/adhd_player.tscn" id="7_ynf5e"]
+[ext_resource type="Texture2D" uid="uid://c23fpp2ff232e" path="res://Img_Assets/FastForward.png" id="8_344ge"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_0xm2m")
@@ -44,20 +47,29 @@ offset_top = -1306.0
 offset_right = 1888.0
 offset_bottom = -1094.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Camera2D/Collect"]
-layout_mode = 0
-offset_right = 216.0
-offset_bottom = 212.0
-mouse_filter = 2
-theme_override_font_sizes/normal_font_size = 40
-text = "Send
-To
-Collection"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D/Collect"]
+position = Vector2(108, 105)
+scale = Vector2(0.820313, 0.820313)
+texture = ExtResource("4_6bp64")
 
 [node name="Code" parent="Camera2D" instance=ExtResource("5_lquwl")]
 position = Vector2(-2339, -1302)
+
+[node name="ADHDPlayer" parent="Camera2D" instance=ExtResource("7_ynf5e")]
+position = Vector2(0, -1354)
+
+[node name="Speedup" type="Node2D" parent="Camera2D"]
+position = Vector2(1445, -1306)
+
+[node name="Button" type="Button" parent="Camera2D/Speedup"]
+offset_right = 218.0
+offset_bottom = 212.0
+toggle_mode = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D/Speedup"]
+position = Vector2(108, 105)
+scale = Vector2(0.828125, 0.828125)
+texture = ExtResource("8_344ge")
 
 [node name="Collection" parent="." instance=ExtResource("2_0xm2m")]
 position = Vector2(0, 2000)
@@ -84,3 +96,4 @@ position = Vector2(0, 2191)
 
 [connection signal="button_down" from="Camera2D/Quit/Quit" to="." method="_on_quit_button_down"]
 [connection signal="button_down" from="Camera2D/Collect" to="." method="_on_collect_button_down"]
+[connection signal="toggled" from="Camera2D/Speedup/Button" to="." method="_on_button_toggled"]
