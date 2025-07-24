@@ -1,11 +1,14 @@
+class_name fusion
 extends Node2D
 
 @export var fusion_list = []
 @export var current_rarity = "F"
 @onready var grade_text = $Grade
 
+var fusionAnimScene = load("res://Scenes/fusion_anim.tscn")
+
 #Return the next rarity
-func next_rarity(rarity):
+static func next_rarity(rarity):
 	match rarity:
 		"F":
 			return "E"
@@ -46,6 +49,12 @@ func fuse_cards():
 				card.queue_free()
 				to_delete -= 1
 		car_fused.init_card()
+		var instance = fusionAnimScene.instantiate()
+		get_tree().root.get_child(0).get_node("Camera2D").add_child(instance)
+		instance.position = Vector2(0, 0)
+		instance.card_grade = current_rarity
+		instance.card_name = fusion_list[0].card_params["name"]
+		instance._set_cards()
 		fusion_list.clear()
 
 #Call the fusion cards functions

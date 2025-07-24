@@ -21,7 +21,7 @@ var card_params = {
 }
 
 #Card variables
-var flipped = false
+@export var flipped = false
 var grade_color = Color.WHITE
 var toDestroy := true # Used as last resort to detect if it's a card
 
