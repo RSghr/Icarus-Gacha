@@ -7,7 +7,9 @@ var boosterScene = load("res://Scenes/booster.tscn")
 #Catching the variable of all important objects
 @onready var adhd_player = $Camera2D/ADHDPlayer
 @onready var collection = $Collection
-@onready var daily = $Daily
+@onready var currency = $Camera2D/Currency
+@onready var race = $Race
+#@onready var daily = $Daily
 @onready var marker_nodes = [
 	$Marker2D1,
 	$Marker2D2,
@@ -15,6 +17,8 @@ var boosterScene = load("res://Scenes/booster.tscn")
 	$Marker2D4,
 	$Marker2D5
 ]
+
+var isRacing = false
 
 #Camera handling
 @export var scroll_speed: float = 0.7
@@ -79,8 +83,8 @@ func spawn_cards_to_markers():
 		var tween = create_tween()
 		tween.tween_property(instance, "position", marker.global_position, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	$Booster.availability -= 1
-	$Daily.pulls = $Booster.availability
-	$Daily.update_daily_save()
+	#$Daily.pulls = $Booster.availability
+	#$Daily.update_daily_save()
 	if $Booster.availability == 0:
 		$Booster.queue_free()
 
@@ -194,5 +198,22 @@ func _on_button_toggled(toggled_on: bool) -> void:
 			curr_pb_speed = 1.0
 			_set_playback_speed(anim_player, curr_pb_speed)
 			
-func _set_playback_speed(animation, pb_speed):
-	animation.speed_scale = pb_speed
+func _set_playback_speed(animation, playb_speed):
+	animation.speed_scale = playb_speed
+
+func _on_get_pack_button_down() -> void:
+	if currency.check_balance(100) and !has_node("Booster"):
+		currency.modify_balance(100, -1)
+		currency.spawn_pack()
+
+func _on_racing_button_down() -> void:
+	if isRacing:
+		$Camera2D/Racing/Text.text = "GAMBLE TIME"
+		collection.visible = true
+		race.visible = false
+		isRacing = false
+	else :
+		$Camera2D/Racing/Text.text = "Go to collection"
+		collection.visible = false
+		race.visible = true
+		isRacing = true

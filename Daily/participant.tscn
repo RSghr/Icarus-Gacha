@@ -1,0 +1,68 @@
+[gd_scene load_steps=14 format=3 uid="uid://bl77pp7kffris"]
+
+[ext_resource type="Texture2D" uid="uid://bwubeoytnwjkd" path="res://Daily/Character_icons/Pyro.png" id="1_37vka"]
+[ext_resource type="Script" uid="uid://b1jprba8icuea" path="res://Daily/participant.gd" id="1_iwnh0"]
+[ext_resource type="Texture2D" uid="uid://oba3kpn7y54u" path="res://Daily/Character_icons/Magpie.png" id="2_iwnh0"]
+[ext_resource type="Texture2D" uid="uid://bfyb37rcgkqss" path="res://Daily/Character_icons/Rippinkittin.png" id="3_l4t5d"]
+[ext_resource type="Texture2D" uid="uid://x0puc81awewh" path="res://Daily/Character_icons/Boss.png" id="4_ipsc5"]
+[ext_resource type="Texture2D" uid="uid://sqsu7psb05ee" path="res://Daily/Character_icons/Frivelk.png" id="5_b2cy6"]
+[ext_resource type="Texture2D" uid="uid://b0iip4qo3qt2x" path="res://Daily/Character_icons/Shakary.png" id="6_g857c"]
+[ext_resource type="Texture2D" uid="uid://drffpn2n3ymix" path="res://Daily/Character_icons/Warspite.png" id="7_0sa6y"]
+[ext_resource type="Texture2D" uid="uid://dnraff1kwyeer" path="res://Daily/Character_icons/Roach.png" id="8_vcd77"]
+[ext_resource type="Texture2D" uid="uid://b21rxeh13godg" path="res://Daily/Character_icons/Panini.png" id="9_m4iyg"]
+[ext_resource type="Texture2D" uid="uid://3vrv473ps3qe" path="res://Daily/Character_icons/Pengus.png" id="10_0co61"]
+[ext_resource type="Texture2D" uid="uid://bsur0ciw674vh" path="res://Daily/Mood.png" id="12_l4t5d"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cv6qk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_37vka")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_iwnh0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_l4t5d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ipsc5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_b2cy6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_g857c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_0sa6y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_vcd77")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_m4iyg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_0co61")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Participant" type="Node2D"]
+script = ExtResource("1_iwnh0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cv6qk")
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[node name="Mood" type="Sprite2D" parent="."]
+position = Vector2(61, 63)
+texture = ExtResource("12_l4t5d")
+
+[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

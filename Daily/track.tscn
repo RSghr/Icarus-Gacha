@@ -1,0 +1,68 @@
+[gd_scene load_steps=4 format=3 uid="uid://dy14p026f33gr"]
+
+[ext_resource type="Script" uid="uid://cnp785s5pdeft" path="res://Daily/Track.gd" id="1_40s7i"]
+[ext_resource type="Texture2D" uid="uid://cailaq5tti0aj" path="res://Daily/Medal.png" id="2_6ru4n"]
+[ext_resource type="Texture2D" uid="uid://bnwjfxt3f3wk6" path="res://Daily/Chevron.png" id="2_40s7i"]
+
+[node name="Track" type="Node2D"]
+script = ExtResource("1_40s7i")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1500.0
+offset_top = 50.0
+offset_right = 1500.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.08, 0.08, 0.08, 0.388235)
+
+[node name="Betting" type="Node2D" parent="."]
+position = Vector2(-1575, 94)
+
+[node name="Betting" type="Button" parent="Betting"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -75.0
+offset_bottom = 75.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Betting"]
+position = Vector2(-125, 0)
+texture = ExtResource("2_40s7i")
+
+[node name="Start" type="Marker2D" parent="."]
+position = Vector2(-1500, 100)
+
+[node name="Finish" type="Marker2D" parent="."]
+position = Vector2(1500, 100)
+
+[node name="Medal" type="Sprite2D" parent="."]
+position = Vector2(1737, 100)
+scale = Vector2(0.685547, 0.685547)
+texture = ExtResource("2_6ru4n")
+
+[node name="Position" type="RichTextLabel" parent="Medal"]
+modulate = Color(0, 0, 0, 1)
+offset_left = -152.216
+offset_top = -124.541
+offset_right = 154.784
+offset_bottom = 112.459
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 150
+text = "#1"
+scroll_active = false
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_down" from="Betting/Betting" to="." method="_on_betting_button_down"]

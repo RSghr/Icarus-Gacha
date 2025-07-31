@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2pub2upik7u"]
+
+[ext_resource type="PackedScene" uid="uid://bkquelsp04hw8" path="res://Scenes/Card.tscn" id="1_vr8ag"]
+
+[node name="Card holder" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 0.0479736
+offset_bottom = 0.135925
+
+[node name="Card" parent="." instance=ExtResource("1_vr8ag")]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Card"]
+offset_left = -372.0
+offset_top = 495.0
+offset_right = -225.0
+offset_bottom = 627.0
+theme_override_font_sizes/normal_font_size = 80
+text = "x3
+"
+horizontal_alignment = 1
+vertical_alignment = 1

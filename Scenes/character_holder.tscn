@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxgcmicwrhfng"]
+
+[ext_resource type="PackedScene" uid="uid://b2pub2upik7u" path="res://Scenes/card_holder.tscn" id="1_8hf2c"]
+[ext_resource type="Script" uid="uid://bsh6m6i2wlu00" path="res://Scripts/character_holder.gd" id="1_h0esq"]
+
+[node name="character_holder" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_h0esq")
+
+[node name="CharacterName" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_top = -233.0
+offset_right = 3926.0
+offset_bottom = 40.0
+theme_override_font_sizes/normal_font_size = 150
+text = "Roach Summer Edition"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+clip_contents = false
+offset_right = 4000.0
+offset_bottom = 1300.0
+follow_focus = true
+draw_focus_border = true
+vertical_scroll_mode = 0
+scroll_deadzone = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 400
+theme_override_constants/margin_top = 550
+
+[node name="ScrollContainer" type="HBoxContainer" parent="ScrollContainer/MarginContainer"]
+custom_minimum_size = Vector2(375, 500)
+layout_mode = 2
+theme_override_constants/separation = 1000
+alignment = 1
+
+[node name="Z" parent="ScrollContainer/MarginContainer/ScrollContainer" instance=ExtResource("1_8hf2c")]
+layout_mode = 2
+
+[node name="S+" parent="ScrollContainer/MarginContainer/ScrollContainer" instance=ExtResource("1_8hf2c")]
+layout_mode = 2
+
+[node name="S" parent="ScrollContainer/MarginContainer/ScrollContainer" instance=ExtResource("1_8hf2c")]
+layout_mode = 2
+
+[node name="A" parent="ScrollContainer/MarginContainer/ScrollContainer" instance=ExtResource("1_8hf2c")]
+layout_mode = 2
+
+[node name="B" parent="ScrollContainer/MarginContainer/ScrollContainer" instance=ExtResource("1_8hf2c")]
+layout_mode = 2
+
+[node name="C" parent="ScrollContainer/MarginContainer/ScrollContainer" instance=ExtResource("1_8hf2c")]
+layout_mode = 2
+
+[node name="D" parent="ScrollContainer/MarginContainer/ScrollContainer" instance=ExtResource("1_8hf2c")]
+layout_mode = 2
+
+[node name="E" parent="ScrollContainer/MarginContainer/ScrollContainer" instance=ExtResource("1_8hf2c")]
+layout_mode = 2
+
+[node name="F" parent="ScrollContainer/MarginContainer/ScrollContainer" instance=ExtResource("1_8hf2c")]
+layout_mode = 2

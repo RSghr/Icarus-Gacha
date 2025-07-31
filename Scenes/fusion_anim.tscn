@@ -7,7 +7,7 @@
 
 [sub_resource type="Animation" id="Animation_0k6tw"]
 resource_name = "Fuse_card"
-length = 4.5
+length = 3.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -15,7 +15,7 @@ tracks/0/path = NodePath("Card_Holder:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2.73333, 2.86667, 3, 4.5),
+"times": PackedFloat32Array(0, 1.83333, 1.96667, 2.1, 3.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [0.0, 0.0, -0.0872665, 0.0, 12.5664]
@@ -27,7 +27,7 @@ tracks/1/path = NodePath("Card_Holder/Card:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 3, 4.5),
+"times": PackedFloat32Array(0, 2.1, 3.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0, -750), Vector2(0, -750), Vector2(0, 0)]
@@ -39,7 +39,7 @@ tracks/2/path = NodePath("Card_Holder/Card2:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 3, 4.5),
+"times": PackedFloat32Array(0, 2.1, 3.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(-1000, 750), Vector2(-1000, 750), Vector2(0, 0)]
@@ -51,7 +51,7 @@ tracks/3/path = NodePath("Card_Holder/Card3:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 3, 4.5),
+"times": PackedFloat32Array(0, 2.1, 3.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(1000, 750), Vector2(1000, 750), Vector2(0, 0)]
@@ -63,7 +63,7 @@ tracks/4/path = NodePath("Card_Holder/Card:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 3, 4.5),
+"times": PackedFloat32Array(0, 2.1, 3.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, 0.0, -12.5664]
@@ -75,7 +75,7 @@ tracks/5/path = NodePath("Card_Holder/Card2:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 3, 4.5),
+"times": PackedFloat32Array(0, 2.1, 3.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, 0.0, -12.5664]
@@ -87,7 +87,7 @@ tracks/6/path = NodePath("Card_Holder/Card3:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 3, 4.5),
+"times": PackedFloat32Array(0, 2.1, 3.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, 0.0, -12.5664]
@@ -99,7 +99,7 @@ tracks/7/path = NodePath("Shiny:modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0.0333334, 3.8, 4.0333, 4.3, 4.5),
+"times": PackedFloat32Array(0.0333334, 2.9, 3.1333, 3.4, 3.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -111,7 +111,7 @@ tracks/8/path = NodePath("Shiny:scale")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0, 4.03333, 4.26667, 4.5),
+"times": PackedFloat32Array(0, 3.13333, 3.36667, 3.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1, 1), Vector2(2, 2), Vector2(1, 1)]
@@ -123,7 +123,7 @@ tracks/9/path = NodePath("ResultCard:modulate")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(0, 4.43333, 4.5),
+"times": PackedFloat32Array(0, 3.53333, 3.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -135,7 +135,7 @@ tracks/10/path = NodePath("Card_Holder:skew")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(0, 3, 3.93333, 4.33333),
+"times": PackedFloat32Array(0, 2.1, 3.03333, 3.43333),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [0.0, 0.0, 0.698132, 0.0]
@@ -147,7 +147,7 @@ tracks/11/path = NodePath("Take in:visible")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
-"times": PackedFloat32Array(0, 4.5),
+"times": PackedFloat32Array(0, 3.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -159,7 +159,7 @@ tracks/12/path = NodePath("ResultCard")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
-"times": PackedFloat32Array(4.4),
+"times": PackedFloat32Array(3.5),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -173,7 +173,7 @@ tracks/13/path = NodePath("Card_Holder:visible")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
-"times": PackedFloat32Array(0, 4.5),
+"times": PackedFloat32Array(0, 3.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]

@@ -1,15 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://p3ddn3cvbqky"]
+[gd_scene load_steps=13 format=3 uid="uid://p3ddn3cvbqky"]
 
 [ext_resource type="Script" uid="uid://bqpwdij22amcr" path="res://Scripts/main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://o1am6pwlvb" path="res://Scenes/collection.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://dcefxn5gaiji6" path="res://Scenes/background.tscn" id="2_21xkr"]
-[ext_resource type="PackedScene" uid="uid://7imb5eg5an35" path="res://Scenes/daily.tscn" id="3_h2yge"]
 [ext_resource type="Texture2D" uid="uid://q5ui0612lhb2" path="res://Img_Assets/Chevron.png" id="4_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://dlllmrxvqebnn" path="res://Img_Assets/Refresh.png" id="4_6bp64"]
 [ext_resource type="PackedScene" uid="uid://bcrh73ga5alpv" path="res://Scenes/code.tscn" id="5_lquwl"]
 [ext_resource type="Texture2D" uid="uid://depat21qvojgr" path="res://Img_Assets/Slow.png" id="7_hptm8"]
 [ext_resource type="PackedScene" uid="uid://butvakuo7nhsb" path="res://Scenes/adhd_player.tscn" id="7_ynf5e"]
 [ext_resource type="Texture2D" uid="uid://c23fpp2ff232e" path="res://Img_Assets/FastForward.png" id="8_344ge"]
+[ext_resource type="PackedScene" uid="uid://ctsl4sdvoyijl" path="res://Scenes/currency.tscn" id="9_6iyac"]
+[ext_resource type="PackedScene" uid="uid://x3rbvsus1jr1" path="res://Daily/race.tscn" id="11_d1ilt"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_d1ilt"]
 animations = [{
@@ -86,11 +87,40 @@ position = Vector2(108, 105)
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_d1ilt")
 
+[node name="Currency" parent="Camera2D" instance=ExtResource("9_6iyac")]
+position = Vector2(-1448, -1220)
+
+[node name="GetPack" type="Button" parent="Camera2D/Currency"]
+offset_left = 470.01
+offset_top = -62.0
+offset_right = 597.01
+offset_bottom = 67.0
+
+[node name="Racing" type="Button" parent="Camera2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -255.0
+offset_top = -1300.0
+offset_right = 255.0
+offset_bottom = -1088.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Text" type="RichTextLabel" parent="Camera2D/Racing"]
+layout_mode = 0
+offset_right = 509.0
+offset_bottom = 212.0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 60
+text = "GAMBLE TIME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Collection" parent="." instance=ExtResource("2_0xm2m")]
 position = Vector2(0, 2000)
-
-[node name="Daily" parent="." instance=ExtResource("3_h2yge")]
-position = Vector2(-250, 1000)
 
 [node name="Marker2D1" type="Marker2D" parent="."]
 position = Vector2(-1700, 0)
@@ -109,6 +139,11 @@ position = Vector2(1750, 0)
 [node name="Deleted" type="Marker2D" parent="."]
 position = Vector2(0, 2191)
 
+[node name="Race" parent="." instance=ExtResource("11_d1ilt")]
+visible = false
+
 [connection signal="button_down" from="Camera2D/Quit/Quit" to="." method="_on_quit_button_down"]
 [connection signal="button_down" from="Camera2D/Collect" to="." method="_on_collect_button_down"]
 [connection signal="toggled" from="Camera2D/Speedup/Button" to="." method="_on_button_toggled"]
+[connection signal="button_down" from="Camera2D/Currency/GetPack" to="." method="_on_get_pack_button_down"]
+[connection signal="button_down" from="Camera2D/Racing" to="." method="_on_racing_button_down"]

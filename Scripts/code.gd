@@ -61,37 +61,54 @@ func _Custom_Redeem(code):
 	var config = ConfigFile.new()
 	var path = "user://Icarus_Gacha/redeem_log.cfg"
 	config.load(path)
-	var used = config.get_value("OTC", "redeemed", false)
-	if code == "0.5.0 is here" and !used:
-		_Create_pulls(10)
+	var used = config.get_value("OTC", "060", false)
+	if code == "0.6.0 is here" and !used:
+		mainScene.currency.modify_balance(600,1)
 		config.load(path)
-		config.set_value("OTC", "redeemed", true)
+		config.set_value("OTC", "060", true)
 		config.save(path)
 	if code == "ADHD" :
 		mainScene.adhd_player.play_ADHD_Videos()
 	if code == "stop" :
 		mainScene.adhd_player.stop_curr_vid()
+	
+	used = config.get_value("OTC", "reset", false)
+	#fixing the save
+	if code == "reset" and !used:
+		mainScene.currency.currency = 400
+		mainScene.currency.modify_balance(0,0)
+		config.load(path)
+		config.set_value("OTC", "reset", true)
+		config.save(path)
+	if code == "override" and used:
+		config.load(path)
+		config.set_value("OTC", "reset", false)
+		config.save(path)
+	
 
 #Code redeem logic, show daily object if true
 func _on_button_button_down() -> void:
 	var code = $TextEdit.text
 	if redeem_code(code, 0):
-		_Create_pulls(3)
+		mainScene.currency.currency += mainScene.currency.daily_currency
+		mainScene.currency.update_daily_save()
 	else:
 		$TextEdit.text = ""
 		$TextEdit.placeholder_text = "Invalid or already used."
 
-func _Create_pulls(pulls):
-	var instance = mainScene.get_node("Daily")
-	instance._ready()
-	instance.coded = true
-	instance.pulls += pulls
-	instance.button_update(1.0, false)
-	instance.update_daily_save()
-	instance.label_update()
-	instance.position = Vector2(-250.0, 1000.0)
-	$TextEdit.text = "Code redeemed!"
+
+#0.5.0 AND BELOW
+#func _Create_pulls(pulls):
+	#var instance = mainScene.get_node("Daily")
+	#instance._ready()
+	#instance.coded = true
+	#instance.pulls += pulls
+	#instance.button_update(1.0, false)
+	#instance.update_daily_save()
+	#instance.label_update()
+	#instance.position = Vector2(-250.0, 1000.0)
+	#$TextEdit.text = "Code redeemed!"
 
 
-func _on_text_edit_text_submitted(new_text: String) -> void:
+func _on_text_edit_text_submitted(_new_text: String) -> void:
 	_on_button_button_down()

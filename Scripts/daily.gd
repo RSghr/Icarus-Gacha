@@ -4,6 +4,9 @@ const SAVE_PATH = "user://Icarus_Gacha/daily_button.cfg"
 @onready var dailyButton = $Get_Daily
 @onready var pulls = 3
 
+var currency = 0
+var daily_currency = 300
+
 var boosterScene = load("res://Scenes/booster.tscn")
 var mainScene
 var coded = false
@@ -17,9 +20,11 @@ func _ready():
 	var last_press_date = ""
 	if err == OK:
 		last_press_date = config.get_value("daily", "last_pressed", "")
+		currency = config.get_value("currency", "bottle", 0)
 	
 	if last_press_date == today :
 		pulls = config.get_value("packs", "unopened", pulls)
+		
 	label_update()
 	if last_press_date == today and !coded and pulls == 0:
 		button_update(0.0, true)
@@ -44,6 +49,17 @@ func update_daily_save():
 	var config = ConfigFile.new()
 	config.set_value("daily", "last_pressed", get_today_string())
 	config.set_value("packs", "unopened", pulls)
+	config.set_value("currency", "bottle", daily_currency)
+	
+	var _today = get_today_string()
+	var _last_press_date = ""
+	_last_press_date = config.get_value("daily", "last_pressed", "")
+	
+	config.save(SAVE_PATH)
+
+func daily_currency_taken():
+	var config = ConfigFile.new()
+	config.set_value("currency", "daily",true)
 	config.save(SAVE_PATH)
 
 #if it was already claimed, just hide it

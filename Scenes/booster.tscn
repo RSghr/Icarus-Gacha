@@ -260,6 +260,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="NextPack" type="Button" parent="."]
+visible = false
 offset_left = -345.0
 offset_top = 817.0
 offset_right = 346.0

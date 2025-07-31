@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://x3rbvsus1jr1"]
+
+[ext_resource type="PackedScene" uid="uid://dy14p026f33gr" path="res://Daily/track.tscn" id="1_e1pls"]
+[ext_resource type="Script" uid="uid://ckofkl3ufski1" path="res://Daily/race.gd" id="1_gu0hw"]
+
+[node name="Race" type="Node2D"]
+script = ExtResource("1_gu0hw")
+
+[node name="Track1" parent="." instance=ExtResource("1_e1pls")]
+position = Vector2(0, -500)
+
+[node name="Track2" parent="." instance=ExtResource("1_e1pls")]
+position = Vector2(0, -300)
+
+[node name="Track3" parent="." instance=ExtResource("1_e1pls")]
+position = Vector2(0, -100)
+
+[node name="Track4" parent="." instance=ExtResource("1_e1pls")]
+position = Vector2(0, 100)
+
+[node name="Track5" parent="." instance=ExtResource("1_e1pls")]
+position = Vector2(0, 300)
+
+[node name="Track6" parent="." instance=ExtResource("1_e1pls")]
+position = Vector2(0, 500)
+
+[node name="Start_Race" type="Button" parent="."]
+offset_left = -141.0
+offset_top = 741.0
+offset_right = 123.0
+offset_bottom = 1005.0
+
+[node name="GO" type="RichTextLabel" parent="Start_Race"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 130
+text = "GO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_down" from="Start_Race" to="." method="_on_start_race_button_down"]
